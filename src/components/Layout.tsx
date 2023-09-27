@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import Footer from "./Footer";
 
-type Props = PropsWithChildren<{}>;
+type Props = PropsWithChildren<object>;
 
 function Layout({ children }: Props) {
   return (
