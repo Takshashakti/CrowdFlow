@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import Layout from "~/components/layout";
-import SummaryCard from "~/components/SummaryCard";
-import ChartCard from "~/components/ChartCard";
+import Layout from "../../components/Layout";
+import SummaryCard from "../../components/SummaryCard";
+import ChartCard from "../../components/ChartCard";
 
 function DashboardPage() {
   return (
