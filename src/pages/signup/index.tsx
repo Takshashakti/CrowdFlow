@@ -94,8 +94,8 @@ function SignUpPage() {
 
             <button
             type="submit"
-            className="bg-[#4172DC] py-4 text-white">
-            Sign In
+            className="bg-[#4172DC] py-4 text-white rounded-lg">
+            Sign Up
             </button>
             </form>
     </div>
