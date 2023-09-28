@@ -43,8 +43,9 @@ function SignUpPage() {
                 <label htmlFor="phone">Gender</label>
                 </div>
                 
-               <div className="gender"> <select name="gender" id="gender" >
-                       <option value="" >-Select Gender-</option>
+               <div className="border-2 rounded-md"> <select className="w-full bg-slate-100 px-1 py-2 "
+               name="gender" id="gender" >
+                       <option value="" >Select Gender</option>
                        <option value="Male">Male</option>
                        <option value="Female">Female</option>
                        <option value="Other">Other</option>
