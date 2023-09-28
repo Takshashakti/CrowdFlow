@@ -53,7 +53,7 @@ return (
                 className=" border  w-1 h-1  px-2 py-2  rounded-sm bg-slate-200"
                 ref={phoneRef}
                 />
-                 <span class="checkmark"></span> 
+                 <span className="checkmark"></span> 
               </label></div>
                 <div className="flex justify-between mx-4 font-italic">
                 <label htmlFor="phone">I declare my report as accurate. I will be held accountable in case of any wrong reporting.</label>
