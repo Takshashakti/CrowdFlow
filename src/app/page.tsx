@@ -1,5 +1,6 @@
 import HomeSearchBar from "@/components/HomeSearchBar";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import ReportIncident from "@/components/ReportIncident";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -44,6 +45,7 @@ export default function Home() {
                 </div>
               </div>
             </SheetFooter> */}
+            <ReportIncident />
           </SheetContent>
         </Sheet>
       </div>
