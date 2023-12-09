@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "dev.pages.crowdflow.twa",
+        "sha256_cert_fingerprints": ["06:78:F8:1E:2A:3D:90:E8:D4:09:33:F5:26:13:14:1E:EC:FD:4E:AC:DD:44:2B:E6:6D:E2:6E:92:A4:D2:4F:1A"]
+      }
+    }]
