@@ -1,7 +1,7 @@
 import HomeSearchBar from "@/components/HomeSearchBar";
 // import MapComponent from "@/components/MapComponent";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import ReportIncident from "@/components/ReportIncident";
+import ReportIncident from "@/components/ReportIncidentForm";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
