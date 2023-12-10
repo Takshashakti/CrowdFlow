@@ -1,76 +1,105 @@
-import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import EmblaCarousel from "./EmblaCarousel";
-import { Camera, X } from "lucide-react";
+import {
+  Aperture,
+  ArrowLeft,
+  Camera,
+  SwitchCamera,
+  Upload,
+} from "lucide-react";
 import CameraClick from "./CameraClick";
 
-
-
 type PropType = {
-    selectedImages: Blob[]
-    setSelectedImages: (images: Blob[]) => void
-}
+  selectedImages: Blob[];
+  setSelectedImages: (images: Blob[]) => void;
+};
 
+const ReportIncidentImage: React.FC<PropType> = (props) => {
+  const { selectedImages, setSelectedImages } = props;
 
-const ReportIncidentImage : React.FC<PropType> = (props) => {
-    const { selectedImages, setSelectedImages } = props
-    
-    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (files) {
-            setSelectedImages([ ...Array.from(files), ...selectedImages]);
-        }
-    };
-    
-    const onCapture = (image: Blob) => {
-        setSelectedImages([image, ...selectedImages])
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      setSelectedImages([...Array.from(files), ...selectedImages]);
     }
-    
-    const [cameraOpened, setCameraOpened] = useState(false);
-    const [cameraClickRequired, setCameraClickRequired] = useState(false);
-    
-    return (
-        <>
-        <div className="flex flex-col items-center justify-center w-[90dvw] h-[50dvh] bg-slate-800 mx-auto rounded-lg overflow-hidden">
-        {
-            !cameraOpened &&
-            <>
-            <Button className="w-1/2 mt-5 mb-5" onClick={() => setCameraOpened(true)}>
-            Open Camera
+  };
+
+  const onCapture = (image: Blob) => {
+    setSelectedImages([image, ...selectedImages]);
+  };
+
+  const [cameraOpened, setCameraOpened] = useState(false);
+  const [cameraClickRequired, setCameraClickRequired] = useState(false);
+
+  return (
+    <>
+      <div className="flex items-center gap-8 py-5 justify-center mx-auto rounded-lg">
+        {!cameraOpened && (
+          <>
+            <Button
+              className="rounded-full w-16 h-16"
+              onClick={() => setCameraOpened(true)}
+            >
+              <Camera />
             </Button>
-            <Input name="Upload Files" type="file" multiple className="hidden" onChange={handleFileUpload} />
-            <Button className="w-1/2 mt-5 mb-5" onClick={() => document.getElementsByName('Upload Files')[0].click()}>
-            Upload Files
+            <Input
+              name="Upload Files"
+              type="file"
+              multiple
+              className="hidden"
+              onChange={handleFileUpload}
+            />
+            <Button
+              className="rounded-full w-16 h-16"
+              onClick={() =>
+                document.getElementsByName("Upload Files")[0].click()
+              }
+            >
+              <Upload />
             </Button>
-            </>
-        }
-        { cameraOpened && 
-            <>
-            <div className="flex justify-start w-full">
-            <Button className="w-1/4 h-[20] my-2 opacity-50 ml-auto" onClick={() => setCameraOpened(false)} variant="destructive">
-            <X className="w-1/2" />
-            </Button>
-            </div>
-            <CameraClick cameraRequireClick={cameraClickRequired} setCameraRequireClick={setCameraClickRequired} onCapture={onCapture} />
-            </>
-        }
+          </>
+        )}
+        {cameraOpened && (
+          <CameraClick
+            cameraRequireClick={cameraClickRequired}
+            setCameraRequireClick={setCameraClickRequired}
+            onCapture={onCapture}
+          />
+        )}
+      </div>
+
+      {(selectedImages.length !== 0 || cameraOpened) && (
+        <div className="h-[20dvh]">
+          <EmblaCarousel
+            slides={selectedImages}
+            deleteSlide={(index) =>
+              setSelectedImages(selectedImages.filter((_, i) => i !== index))
+            }
+            options={{ dragFree: true, containScroll: "trimSnaps" }}
+          />
         </div>
-        
-        <div className="h-[20dvh] overflow-hidden">
-        <EmblaCarousel slides={selectedImages} deleteSlide={(index) => setSelectedImages(selectedImages.filter((_, i) => i !== index))}  options={{ dragFree: true, containScroll: 'trimSnaps' }} />
+      )}
+      {cameraOpened && (
+        <div className="w-full flex items-center justify-evenly gap-3 my-5">
+          <Button variant="outline" onClick={() => setCameraOpened(false)}>
+            <ArrowLeft />
+          </Button>
+          <Button
+            className="w-16 h-16 rounded-full"
+            onClick={() => setCameraClickRequired(true)}
+          >
+            <Aperture className="w-10 h-10 mx-auto" />
+          </Button>
+          <Button variant="outline">
+            {/* TODO: this */}
+            <SwitchCamera />
+          </Button>
         </div>
-        {
-            cameraOpened &&
-            <div className="mx-auto flex items-center justify-center">
-            <Button className="w-1/4 h-[20] mt-5 mb-5" onClick={() => setCameraClickRequired(true)}>
-            <Camera className="w-1/2 mx-auto" />
-            </Button>
-            </div>
-        }
-        </>
-        )
-    }
-    
-    export default ReportIncidentImage
+      )}
+    </>
+  );
+};
+
+export default ReportIncidentImage;
