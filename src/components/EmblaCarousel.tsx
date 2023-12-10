@@ -3,7 +3,7 @@
 import React from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { X } from 'lucide-react';
-import { Button, buttonVariants } from './ui/button';
+import { Button } from './ui/button';
 
 type PropType = {
   slides: Blob[]
@@ -24,8 +24,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>
-              <Button className="absolute top-0 right-0 opacity-50" variant="destructive" onClick={() => deleteSlide(index)}>
-                <X  />
+              <Button className="absolute top-0 right-0 -mr-1 -mt-1 p-0 h-5 w-5" variant="destructive" onClick={() => deleteSlide(index)}>
+                <X className="h-3 w-3" />
               </Button>
               <img
                 className="embla__slide__img object-contain"

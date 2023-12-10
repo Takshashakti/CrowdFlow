@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useEffect } from 'react'
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
-import { X } from 'lucide-react';
-import { Button, buttonVariants } from './ui/button';
 import Webcam from 'react-webcam';
 
 type PropType = {
