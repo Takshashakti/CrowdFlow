@@ -16,7 +16,6 @@ type PropType = {
 const CameraClick: React.FC<PropType> = (props) => {
   const { cameraRequireClick, setCameraRequireClick } = props
   const webcamRef = React.useRef(null);
-  const canvasRef = React.useRef(null);
 
   useEffect(() => {
     if (cameraRequireClick) {
@@ -32,11 +31,14 @@ const CameraClick: React.FC<PropType> = (props) => {
   }, [cameraRequireClick])
 
   return (
-    <div>
-        <Webcam 
+    <div className='object-contain'>
+        <Webcam className='object-contain'
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/png"
+            videoConstraints={{
+                facingMode: "environment"
+            }}
         />
     </div>
   )
