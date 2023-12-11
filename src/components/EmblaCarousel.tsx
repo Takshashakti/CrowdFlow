@@ -28,7 +28,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 <X className="h-3 w-3" />
               </Button>
               <img
-                className="embla__slide__img object-contain"
+                className="embla__slide__img object-contain h-20 w-10"
                 src={URL.createObjectURL(blob)}
                 alt="Your alt text"
               />
