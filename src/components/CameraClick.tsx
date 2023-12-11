@@ -29,7 +29,7 @@ const CameraClick: React.FC<PropType> = (props) => {
 
   return (
     <div className='object-contain'>
-        <Webcam className='object-contain'
+        <Webcam className='object-contain h-full max-h-64'
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/png"

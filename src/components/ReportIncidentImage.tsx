@@ -92,8 +92,8 @@ const ReportIncidentImage: React.FC<PropType> = (props) => {
           >
             <Aperture className="w-10 h-10 mx-auto" />
           </Button>
+          {/* TODO: remove this */}
           <Button variant="outline">
-            {/* TODO: this */}
             <SwitchCamera />
           </Button>
         </div>
