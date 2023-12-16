@@ -18,13 +18,13 @@ export default function Settings() {
       <div className='w-full px-5'>
         <SettingsListItems
       name="Account"
-      href='/account' />
+      href='settings/account' />
       <SettingsListItems
       name="Report History"
-      href='/report-history' />
+      href='settings/report-history' />
       <SettingsListItems
       name="Notification"
-      href='/notification' /></div>
+      href='settings/notification' /></div>
       
     </div>
     </MaxWidthWrapper>
