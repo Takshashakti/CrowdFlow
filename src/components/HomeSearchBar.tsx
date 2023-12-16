@@ -1,6 +1,8 @@
-import { SearchIcon, UserRound } from "lucide-react";
+import { SearchIcon, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import Link from 'next/link';
+import SettingsPage from "../app/settings/page";
 
 const HomeSearchBar = () => {
   return (
@@ -9,9 +11,11 @@ const HomeSearchBar = () => {
       <Button type="submit">
         <SearchIcon className="w-6 h-6" />
       </Button>
-      <Button>
-        <UserRound className="w-6 h-6" />
-      </Button>
+      <Link href="/settings">
+          <Button type="button">
+            <Settings className="w-6 h-6" />
+          </Button>
+      </Link>
     </div>
   )
 }
