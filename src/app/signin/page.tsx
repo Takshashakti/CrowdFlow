@@ -59,7 +59,7 @@ export default function DemoCreateAccount() {
 
         {!otpSent ? (
           <button
-            className="mt-5 bg-[black] py-4 text-white"
+            className="mt-5 bg-[black] py-4 rounded-md text-white"
             onClick={(e) => {
               e.preventDefault();
               if (

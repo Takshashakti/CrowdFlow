@@ -98,9 +98,9 @@ export default function DemoCreateAccount() {
 <br></br>
             <div className="flex justify-between font-medium">
                 <p> Already registered ?</p>
-                <a href="src/app/signin/page.tsx" className="text-sm text-[#4172DC] underline">
+                <link href="src/app/signin/page.tsx" className="text-sm text-[#4172DC] underline">
                 Sign In
-                </a>
+                </link>
             </div>
     </div>
   )
