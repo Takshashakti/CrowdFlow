@@ -8,12 +8,14 @@ import {
 import "leaflet/dist/leaflet.css";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import MapComponent from "./MapComponent";
+import { Button } from "./ui/button";
 
 const MMap = ({ setSelectedIncidentId }: {
   setSelectedIncidentId: Dispatch<SetStateAction<string>>;
 }) => {
   return (
     <>
+    
       <MapContainer
         className="fixed full-height-map"
         center={[20.25, 85.82]}

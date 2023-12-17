@@ -2,6 +2,7 @@ import { Icon, LatLng } from "leaflet";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Marker, useMap } from "react-leaflet";
 import CurrentLocationMarker from "./CurrentLocationMarker";
+import { Button } from "./ui/button";
 
 const ISSUES = [
   {
@@ -40,7 +41,7 @@ const MapComponent = ({
     <>
       <CurrentLocationMarker position={position as LatLng} />
 
-      {/* <Button className="absolute z-5">Locate Me</Button> */}
+      {/* <Button className="relative z-5">Locate Me</Button> */}
 
       {ISSUES.map((issue) => (
         <Marker
