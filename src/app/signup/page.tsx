@@ -1,6 +1,7 @@
 "use client"
 
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import Link from 'next/link';
 
 export default function DemoCreateAccount() {
   return (
@@ -98,9 +99,9 @@ export default function DemoCreateAccount() {
 <br></br>
             <div className="flex justify-between font-medium">
                 <p> Already registered ?</p>
-                <a href="src/app/signin/page.tsx" className="text-sm text-[#4172DC] underline">
+                <Link href="src/app/signin/page.tsx" className="text-sm text-[#4172DC] underline">
                 Sign In
-                </a>
+                </Link>
             </div>
     </div>
   )
