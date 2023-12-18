@@ -38,7 +38,7 @@ export default function DashboardSidePannel({
           <li className="group">
             <Link
               href={`${
-                activeTab == "dashboard" ? "dashboard/reports" : "./reports"
+                activeTab == "dashboard" ? "admin/reports" : "./reports"
               }`}
               className={`flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900 ${
                 activeTab == "report" &&
@@ -61,7 +61,7 @@ export default function DashboardSidePannel({
           </li>
           <li className="group">
             <Link
-              href={`${activeTab == "dashboard" ? "dashboard/map" : "./map"}`}
+              href={`${activeTab == "dashboard" ? "admin/map" : "./map"}`}
               className={`flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900 ${
                 activeTab == "map" &&
                 "bg-violet-500 text-white group-hover:bg-violet-800"
