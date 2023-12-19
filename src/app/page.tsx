@@ -3,6 +3,7 @@
 import HomeSearchBar from "@/components/HomeSearchBar";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import NewIncidentSheet from "@/components/NewIncidentSheet";
+import TaskViewItems from "@/components/TaskViewItems";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
@@ -21,10 +22,10 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
-  if (typeof window !== "undefined")
-    if (window.localStorage.getItem("userAuthToken") === null) {
-      redirect("/signup");
-    }
+  // if (typeof window !== "undefined")
+    // if (window.localStorage.getItem("userAuthToken") === null) {
+    //   redirect("/signup");
+    // }
 
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
 
@@ -51,9 +52,20 @@ export default function Home() {
               )}
               <SheetContent side="bottom">
                 <SheetHeader>
-                  <SheetTitle>Assigned Taks</SheetTitle>
+                  <SheetTitle>Assigned Tasks</SheetTitle>
                 </SheetHeader>
-                Enter Tasks Here
+                <div className="overflow-scroll max-h-[25rem]">
+                <TaskViewItems className="border rounded-md">Task1</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task2</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task3</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task4</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task5</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task6</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task7</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task8</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task9</TaskViewItems>
+                <TaskViewItems className="border rounded-md">Task10</TaskViewItems>
+                </div>
               </SheetContent>
             </Sheet>
 
