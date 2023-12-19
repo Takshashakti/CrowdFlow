@@ -95,7 +95,8 @@ export default function DemoCreateAccount() {
                 const res = await o.json();
                 const token = res[0].token;
                 console.log(token);
-                localStorage.setItem("userAuthToken", token);
+                if (typeof window !== "undefined")
+                  window.localStorage.setItem("userAuthToken", token);
                 void router.push("/");
               });
 

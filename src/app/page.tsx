@@ -21,9 +21,10 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
-  if (localStorage.getItem("userAuthToken") === null) {
-    redirect("/signup")
-  }
+  if (typeof window !== "undefined")
+    if (window.localStorage.getItem("userAuthToken") === null) {
+      redirect("/signup");
+    }
 
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
 
