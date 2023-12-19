@@ -3,7 +3,7 @@
 import React from "react";
 import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
 import { X } from "lucide-react";
-import { Button } from "./button";
+// import { Button } from "@/components/ui/button";
 import {
   DotButton,
   PrevButton,
