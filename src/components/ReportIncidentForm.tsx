@@ -1,6 +1,12 @@
 "use client";
 
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -14,6 +20,16 @@ import {
   SelectValue,
 } from "./ui/select";
 import { INCIDENT_CATEGORIES } from "@/lib/config/config";
+import axios from "axios";
+import { SheetClose } from "./ui/sheet";
+import { Card, CardContent } from "./ui/card";
+
+const reverseGeocode = async (lat: string, lng: string) => {
+  const res = await axios.get<ReverseGeocodeResponse>(
+    `https://geocode.maps.co/reverse?lat=${lat}&lon=${lng}`
+  );
+  return res.data.display_name;
+};
 
 type PropType = {
   selectedImages: Blob[];
@@ -24,14 +40,39 @@ type PropType = {
   reportCategory: string;
   setReportCategory: Dispatch<SetStateAction<string>>;
   setSubmitted: Dispatch<SetStateAction<boolean>>;
+  address: string;
+  setAddress: Dispatch<SetStateAction<string>>;
 };
 
 const ReportIncidentForm: React.FC<PropType> = (props) => {
   const [agreed, setAgreed] = useState<boolean>(false);
+  // const [address, setAddress] = useState<string>("");
+
+  useEffect(() => {
+    (async () => {
+      // console.log(await reverseGeocode("80", "53"))
+      const res = await reverseGeocode(encodeURI("20.25"), encodeURI("85.82"));
+      // props.setAddress(`${res.county}, ${res.state}, ${res.region}, ${res.country}`)
+      props.setAddress(res);
+    })();
+  }, [props.address]);
 
   return (
     <div className="flex flex-col px-6 ">
       <form className="flex flex-col gap-4 py-7">
+        {/* <Textarea
+          name="Description"
+          className=" border px-1 py-2 text-l rounded-md bg-slate-100"
+          placeholder=" Report Description"
+          value={props.address}
+          disabled
+        /> */}
+        <Card className="flex flex-col items-center">
+          <CardContent className="">
+            <span className="">{props.address}</span>
+          </CardContent>
+        </Card>
+
         <Input
           type="text"
           name="Name"
@@ -98,15 +139,17 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         </div>
         <br></br>
 
-        <Button
-          disabled={!agreed}
-          onClick={(e) => {
-            e.preventDefault();
-            props.setSubmitted(true);
-          }}
-        >
-          Submit Report
-        </Button>
+        <SheetClose asChild>
+          <Button
+            disabled={!agreed}
+            onClick={(e) => {
+              e.preventDefault();
+              props.setSubmitted(true);
+            }}
+          >
+            Submit Report
+          </Button>
+        </SheetClose>
       </form>
     </div>
   );

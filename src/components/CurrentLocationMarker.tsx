@@ -3,21 +3,23 @@
 import { LatLng } from "leaflet";
 import { useEffect, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { Icon } from "leaflet";
 
-const CurrentLocationMarker = () => {
-  const [position, setPosition] = useState<LatLng | null>(null);
-  const map = useMap();
-  useEffect(() => {
-    map.locate().on("locationfound", function (e) {
-      setPosition(e.latlng);
-      console.log(position)
-      map.flyTo(e.latlng, map.getZoom());
-    });
-  }, []);
+const CurrentLocationMarker = ({ position }: { position: LatLng }) => {
+  
 
   return position === null ? null : (
-    <Marker position={position}>
-      <Popup>Nigga</Popup>
+    <Marker
+      position={position}
+      icon={
+        new Icon({
+          iconUrl: "/currentLocationIcon.png",
+          iconSize: [75, 75],
+        })
+      }
+    >
+      <Popup>You are here!</Popup>
     </Marker>
   );
 };
