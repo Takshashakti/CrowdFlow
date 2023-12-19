@@ -2,13 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
-const TEST_OTP = "696969";
+const TEST_OTP = "0000";
 
 function SignInPage() {}
 
 export default function DemoCreateAccount() {
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [showOTPError, setSetshowOTPError] = useState<boolean>(false);
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const phoneRef = useRef<HTMLInputElement>(null);
   const otpRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -24,6 +25,10 @@ export default function DemoCreateAccount() {
               name="phone"
               className="rounded-none border px-1 py-2 text-xl"
               ref={phoneRef}
+              value={phoneNumber}
+              onChange={(e) => {
+                setPhoneNumber(e.target.value);
+              }}
             />
           </div>
 
@@ -75,10 +80,32 @@ export default function DemoCreateAccount() {
             className="bg-[black] py-4 text-white"
             onClick={(e) => {
               e.preventDefault();
-              if (otpRef.current?.value === TEST_OTP) {
-                localStorage.setItem("authToken", "6969");
+
+              const data = {
+                phnNo: phoneNumber,
+              };
+
+              fetch(
+                "https://crowdflowworkers.karmakarmeghdip.workers.dev/user/login",
+                {
+                  method: "POST",
+                  body: JSON.stringify(data),
+                }
+              ).then(async (o) => {
+                const res = await o.json();
+                const token = res[0].token;
+                console.log(token);
+                if (typeof window !== "undefined")
+                  window.localStorage.setItem("userAuthToken", token);
                 void router.push("/");
-              } else setSetshowOTPError(true);
+              });
+
+              // if (otpRef.current?.value === TEST_OTP) {
+              //   // localStorage.setItem("authToken", "0000");
+              //   // void router.push("/");
+              // } else setSetshowOTPError(true);
+
+              // fetch("");
             }}
           >
             Sign In
