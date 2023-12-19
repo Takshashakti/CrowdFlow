@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Dialog, DialogDescription, DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
 import { ReactNode } from "react";
 import { DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Button } from "./ui/button";
 
 
 interface ListIemProps {
@@ -12,10 +13,10 @@ interface ListIemProps {
 const NotificationItems: React.FC<ListIemProps> = ({children, className}) => {
     return <div className={cn(`
     flex
-    justify-center
-    w-[103%]
-    items-center
+    justify-start
+    w-full
     text-center
+    items-center
     py-2 px-2
     bg-slate-100 
     backdrop-blur-sm 
@@ -24,14 +25,14 @@ const NotificationItems: React.FC<ListIemProps> = ({children, className}) => {
     `, className)
     }>
       
-        <div className="font-medium truncate">
+        <div className="font-medium text-left truncate w-[80%]">
           {children}
         </div>
+
         <Dialog>
-              <DialogTrigger className="bg-black w-auto px-2 py-2 flex rounded-md text-white justify-end ml-[10%]">
-                {" "}
-                View Details{" "}
-              </DialogTrigger>
+              <DialogTrigger className="bg-black w-[20%] px-2 py-2 text-center items-center rounded-md text-white">
+                View Details
+              </DialogTrigger> 
               <DialogContent className="px-6">
                 <DialogHeader>
                   <DialogTitle className="text-2xl font-bold text-center">
