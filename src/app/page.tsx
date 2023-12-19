@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import dynamic from "next/dynamic";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 const MapNoSSR = dynamic(() => import("@/components/Map"), {
@@ -20,6 +21,10 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
+  if (localStorage.getItem("userAuthToken") === null) {
+    redirect("/signup")
+  }
+
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
 
   return (
