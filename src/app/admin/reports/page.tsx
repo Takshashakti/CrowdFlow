@@ -99,7 +99,7 @@ function ReportsPage() {
                     <td className="px-6 py-4">{report.time}</td>
                     <td className="px-6 py-4">
                       <a
-                        href={report.href}
+                        href={`reports${report.href}`}
                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >
                         View

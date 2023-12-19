@@ -16,7 +16,7 @@ export default function DashboardSidePannel({
         <ul className="space-y-2 font-medium">
           <li className="group">
             <Link
-              href="/dashboard"
+              href="/admin"
               className={`flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900 ${
                 activeTab == "dashboard" &&
                 "bg-violet-500 text-white group-hover:bg-violet-800"

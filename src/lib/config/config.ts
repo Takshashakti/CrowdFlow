@@ -135,7 +135,7 @@ export const Reports_data = [
     category: "Water Quality",
     time: "15:25",
     date: "10.12.2023",
-    href: "#",
+    href: "/0",
   },
   {
     title: "Water Problem",
@@ -143,7 +143,7 @@ export const Reports_data = [
     category: "Water Quality",
     time: "15:25",
     date: "10.12.2023",
-    href: "#",
+    href: "/1",
   },
   {
     title: "Water Problem",
@@ -151,6 +151,6 @@ export const Reports_data = [
     category: "Water Quality",
     time: "15:25",
     date: "10.12.2023",
-    href: "#",
+    href: "/2",
   },
 ];
