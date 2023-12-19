@@ -36,29 +36,44 @@ const NewIncidentSheet = () => {
   //   })();
   // }, [selectedImages]);
 
-  useEffect(() => {
-    (async () => {
-      const incident = {
-        user_id: 1,
-        // name: reportName,
-        description: reportDescription,
-        type: reportCategory,
-        // images: selectedImages,
-        image_url: "",
-        city: address?.address.city,
-        state: address?.address.state,
-        district: address?.address.district,
-        time: Date.now(),
-        latitude: parseFloat(userLat),
-        longitude: parseFloat(userLng),
-      };
-      
-      // fetch("https://jsonplaceholder.typicode.com/todos/1")
-      //   .then((response) => response.json())
-      //   .then((json) => console.log(json));
-      // const res = fetch("");
-    })();
-  }, [submitted]);
+  // useEffect(() => {
+
+  // }, [submitted]);
+  const registerIncident = async () => {
+    const incident = {
+      user_id: 1,
+      // name: reportName,
+      description: reportDescription,
+      type: reportCategory,
+      // images: selectedImages,
+      image_url: "",
+      city: address?.address.city,
+      state: address?.address.state,
+      district: address?.address.district,
+      time: Date.now(),
+      latitude: parseFloat(userLat),
+      longitude: parseFloat(userLng),
+    };
+
+    const res = await fetch(
+      "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
+      {
+        method: "POST",
+        // headers: {
+        //   "content-type": "application/json",
+        //   // Authorization: `Bearer ${69}`,
+        // },
+        body: JSON.stringify(incident),
+      }
+    );
+
+    console.log(await res.json());
+
+    // fetch("https://jsonplaceholder.typicode.com/todos/1")
+    //   .then((response) => response.json())
+    //   .then((json) => console.log(json));
+    // const res = fetch("");
+  };
 
   return (
     <Tabs defaultValue="images">
@@ -83,6 +98,7 @@ const NewIncidentSheet = () => {
           setAddress={setAddress}
           setUserLat={setUserLat}
           setUserLng={setUserLng}
+          registerIncident={registerIncident}
         />
       </TabsContent>
 

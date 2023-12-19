@@ -47,6 +47,7 @@ type PropType = {
   setUserLat: Dispatch<SetStateAction<string>>;
   // lng: string;
   setUserLng: Dispatch<SetStateAction<string>>;
+  registerIncident: () => Promise<void>;
 };
 
 const ReportIncidentForm: React.FC<PropType> = (props) => {
@@ -81,36 +82,37 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
     console.log("adress done");
   }, [lat, lng]);
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            user_id: 1,
-            // name: reportName,
-            description: "reportDescription",
-            type: "reportCategory",
-            // images: selectedImages,
-            image_url: "",
-            city: "address?.address.city",
-            state: "address?.address.state",
-            district: "address?.address.district",
-            time: 69,
-            latitude: 69.42,
-            longitude: 69.42,
-          }),
-        }
-      );
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await fetch(
+  //       "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
+  //       {
+  //         method: "POST",
+  //         // mode: "no-cors",
+  //         headers: {
+  //           "content-type": "application/json",
+  //           "Authorization": `Bearer ${69}`
+  //         },
+  //         body: JSON.stringify({
+  //           user_id: 1,
+  //           // name: reportName,
+  //           description: "reportDescription",
+  //           type: "reportCategory",
+  //           // images: selectedImages,
+  //           image_url: "",
+  //           city: "address?.address.city",
+  //           state: "address?.address.state",
+  //           district: "address?.address.district",
+  //           time: 69,
+  //           latitude: 69.42,
+  //           longitude: 69.42,
+  //         }),
+  //       }
+  //     );
 
-      console.log(await res.json());
-    })();
-  });
+  //     console.log(await res.json());
+  //   })();
+  // });
 
   return (
     <div className="flex flex-col px-6 ">
@@ -198,9 +200,10 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
 
         <Button
           disabled={!agreed}
-          onClick={(e) => {
+          onClick={async (e) => {
             e.preventDefault();
-            props.setSubmitted(true);
+            // props.setSubmitted(true);
+            await props.registerIncident();
           }}
         >
           Submit Report
