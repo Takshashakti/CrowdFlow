@@ -8,6 +8,7 @@ import ReportIncidentForm from "./ReportIncidentForm";
 const NewIncidentSheet = () => {
   const [selectedImages, setSelectedImages] = useState<Blob[]>([]);
   const [reportName, setReportName] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
   const [reportDescription, setReportDescription] = useState<string>("");
   const [reportCategory, setReportCategory] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -18,6 +19,7 @@ const NewIncidentSheet = () => {
       description: reportDescription,
       category: reportCategory,
       images: selectedImages,
+      address: address
     };
 
     console.log(incident);
@@ -42,12 +44,14 @@ const NewIncidentSheet = () => {
           reportCategory={reportCategory}
           setReportCategory={setReportCategory}
           setSubmitted={setSubmitted}
+          address={address}
+          setAddress={setAddress}
         />
       </TabsContent>
 
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="images">Attatch Images</TabsTrigger>
-        <TabsTrigger value="details">Add Details</TabsTrigger>
+        <TabsTrigger value="details" disabled={selectedImages.length === 0}>Add Details</TabsTrigger>
       </TabsList>
     </Tabs>
   );

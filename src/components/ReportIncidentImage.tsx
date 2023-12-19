@@ -51,14 +51,14 @@ const ReportIncidentImage: React.FC<PropType> = (props) => {
               className="hidden"
               onChange={handleFileUpload}
             />
-            <Button
+            {/* <Button
               className="rounded-full w-16 h-16"
               onClick={() =>
                 document.getElementsByName("Upload Files")[0].click()
               }
             >
               <Upload />
-            </Button>
+            </Button> */}
           </>
         )}
         {cameraOpened && (
