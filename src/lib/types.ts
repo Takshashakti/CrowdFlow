@@ -13,6 +13,8 @@ type ReverseGeocodeResponse = {
     region: string;
     country: string;
     country_code: string;
+    city: string;
+    district: string;
   };
   boundingbox: [string, string, string, string];
 };
