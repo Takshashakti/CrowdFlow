@@ -22,7 +22,7 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 
 export default function Home() {
   if (typeof window !== "undefined")
-    if (window.localStorage.getItem("userAuthToken") === null) {
+    if (window.localStorage.getItem("UserObject") === null) {
       redirect("/signup");
     }
 

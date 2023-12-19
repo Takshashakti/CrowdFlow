@@ -93,10 +93,9 @@ export default function DemoCreateAccount() {
                 }
               ).then(async (o) => {
                 const res = await o.json();
-                const token = res[0].token;
-                console.log(token);
+                const user = res[0]
                 if (typeof window !== "undefined")
-                  window.localStorage.setItem("userAuthToken", token);
+                  window.localStorage.setItem("UserObject", JSON.stringify(user));
                 void router.push("/");
               });
 
