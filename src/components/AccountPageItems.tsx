@@ -8,24 +8,24 @@ interface ListIemProps {
 }
 
 const AccountPageItems: React.FC<ListIemProps> = ({children, className}) => {
-  return <div className={cn(`flex 
-  relative
+  return <div className={cn(`
   items-start
   justify-center
-  w-fit
+  w-full
   rounded-lg
   h-fit p-5 
-  bg-neutral-900 
-  backdrop-blur 
-  opacity-50
-  py-5
-  m-2
+  bg-slate-100 
+  backdrop-blur-sm 
+  py-2
+  mx-auto
+  my-2
+  border
   `, className)
   }>
     
-      <span className="font-medium truncate pb-3 pt-3">
+      <div className="font-medium">
         {children}
-      </span>
+      </div>
 
     
     </div>;

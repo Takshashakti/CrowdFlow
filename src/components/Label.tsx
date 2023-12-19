@@ -3,7 +3,7 @@ interface ListIemProps {
   }
   
   const Label: React.FC<ListIemProps> = ({children}) => {
-    return <div className='items-start font-bold truncate pb-3 pt-3'>{children}</div>;
+    return <span className='items-start font-bold truncate '>{children}</span>;
   };
   
   export default Label;
