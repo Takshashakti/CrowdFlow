@@ -118,7 +118,7 @@ export default function DashboardSidePannel({
             </Link>
           </li>
         </ul>
-        <div className="fixed py-[25vh]">
+        <div className="absolute bottom-0">
           <div className="font-bold justify-center mx-auto">
             Account Details
           </div>
