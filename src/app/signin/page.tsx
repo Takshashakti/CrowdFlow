@@ -1,19 +1,17 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 const TEST_OTP = "696969";
 
-function SignInPage() {
-  
-}
+function SignInPage() {}
 
 export default function DemoCreateAccount() {
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [showOTPError, setSetshowOTPError] = useState<boolean>(false);
   const phoneRef = useRef<HTMLInputElement>(null);
   const otpRef = useRef<HTMLInputElement>(null);
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div className="flex flex-col px-3">
       <h1 className="pb-16 pt-10 text-2xl font-bold">Sign In</h1>
@@ -25,7 +23,7 @@ export default function DemoCreateAccount() {
               type="text"
               name="phone"
               className="rounded-none border px-1 py-2 text-xl"
-            ref={phoneRef}
+              ref={phoneRef}
             />
           </div>
 
@@ -88,6 +86,5 @@ export default function DemoCreateAccount() {
         )}
       </form>
     </div>
-
-  )
-}            
+  );
+}

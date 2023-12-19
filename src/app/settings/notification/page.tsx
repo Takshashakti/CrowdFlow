@@ -34,24 +34,20 @@ export default function Notification() {
         <h1 className="pb-16 pt-10 text-3xl text-center font-bold">
           Notifications
         </h1>
-        
-          <NotificationItems className="truncate ">
-            {notification.details}
-          </NotificationItems>
-          <NotificationItems className="truncate">
-            {notification.details1}
-          </NotificationItems>
-          <NotificationItems className="truncate">
-            {notification.details2}
-          </NotificationItems>
-          <NotificationItems className="truncate">
-            {notification.details}
-          </NotificationItems>
-          
-            
-          </div>
-        
-      
+
+        <NotificationItems className="truncate ">
+          {notification.details}
+        </NotificationItems>
+        <NotificationItems className="truncate">
+          {notification.details1}
+        </NotificationItems>
+        <NotificationItems className="truncate">
+          {notification.details2}
+        </NotificationItems>
+        <NotificationItems className="truncate">
+          {notification.details}
+        </NotificationItems>
+      </div>
     </MaxWidthWrapper>
   );
 }

@@ -37,9 +37,24 @@ export default function Home() {
         <div className="flex flex-col justify-between w-full h-full">
           <HomeSearchBar />
           <Sheet>
-            <SheetTrigger asChild className="w-full z-10">
-              <Button className="w-full">Report New Incident</Button>
+            {/* {1 && 
+            <SheetTrigger asChild className="w-full z-10 absolute ">
+              <Button className="w-full">Assigned Tasks</Button>
             </SheetTrigger>
+            } */}
+
+            <div className="flex flex-col w-full gap-2 justify-between">
+              {1 && (
+                <SheetTrigger asChild className="w-full z-10 ">
+                  <Button className="w-full">Assigned Tasks</Button>
+                </SheetTrigger>
+              )}
+
+              <SheetTrigger asChild className="w-full z-10 ">
+                <Button className="w-full">Report New Incident</Button>
+              </SheetTrigger>
+            </div>
+
             <SheetContent side="bottom">
               <SheetHeader>
                 <SheetTitle>Report New Incident</SheetTitle>
