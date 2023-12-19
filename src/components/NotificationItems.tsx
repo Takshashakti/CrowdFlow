@@ -25,12 +25,12 @@ const NotificationItems: React.FC<ListIemProps> = ({children, className}) => {
     `, className)
     }>
       
-        <div className="font-medium text-left truncate w-[80%]">
+        <div className="font-medium text-left truncate w-[65%]">
           {children}
         </div>
 
         <Dialog>
-              <DialogTrigger className="bg-black w-[20%] px-2 py-2 text-center items-center rounded-md text-white">
+              <DialogTrigger className="bg-black w-[35%] px-2 py-2 text-center items-center rounded-md text-white">
                 View Details
               </DialogTrigger> 
               <DialogContent className="px-6">
