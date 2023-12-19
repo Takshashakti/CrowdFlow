@@ -2,8 +2,10 @@
 
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function DemoCreateAccount() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     phnNo: "",
@@ -36,23 +38,48 @@ export default function DemoCreateAccount() {
       <h1 className="pb-16 pt-10 text-2xl text-black-800 font-bold">
         Sign Up{" "}
       </h1>
-      <form className="flex flex-col " onSubmit={(e) => {
-        e.preventDefault();
-        console.log(formData)
+      <form
+        className="flex flex-col "
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(formData);
 
-        const formUrl = "";
-        const data = new FormData();
+          const formUrl = "";
+          const data = new FormData();
 
-        Object.entries(formData).forEach(([key, value]) => {
+          Object.entries(formData).forEach(([key, value]) => {
             data.append(key, value as string);
-        })
+          });
 
-        fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/user/register", {
-            method: "POST",
-            body: JSON.stringify(formData),
-            // mode: "no-cors"
-        }).then(async res => console.log(await res.text()))
-      }}>
+          fetch(
+            "https://crowdflowworkers.karmakarmeghdip.workers.dev/user/register",
+            {
+              method: "POST",
+              body: JSON.stringify(formData),
+              // mode: "no-cors"
+            }
+          ).then(async (res) => console.log(await res.text()));
+
+          const loginData = {
+            phnNo: formData.phnNo,
+          };
+
+          fetch(
+            "https://crowdflowworkers.karmakarmeghdip.workers.dev/user/login",
+            {
+              method: "POST",
+              body: JSON.stringify(loginData),
+            }
+          ).then(async (o) => {
+            const res = await o.json();
+            const token = res[0].token;
+            console.log(token);
+            if (typeof window !== "undefined")
+              window.localStorage.setItem("userAuthToken", token);
+            void router.push("/");
+          });
+        }}
+      >
         <div className="flex flex-col gap-7"></div>
         <div className="flex flex-col">
           <div className="flex justify-between font-bold">
