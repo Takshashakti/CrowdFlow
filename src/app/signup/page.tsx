@@ -2,6 +2,7 @@
 
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 
 export default function DemoCreateAccount() {
@@ -38,6 +39,7 @@ export default function DemoCreateAccount() {
       <h1 className="pb-16 pt-10 text-2xl text-black-800 font-bold">
         Sign Up{" "}
       </h1>
+
       <form
         className="flex flex-col "
         onSubmit={(e) => {
@@ -117,8 +119,6 @@ export default function DemoCreateAccount() {
               className="w-full bg-slate-100 px-1 py-2 "
               name="gender"
               id="gender"
-              onChange={handleSelect}
-              value={formData.gender}
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>

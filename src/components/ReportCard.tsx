@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import React from 'react';
+import { cn } from "@/lib/utils";
+import React from "react";
 
 interface ReportCardProps {
   key: number;
@@ -9,12 +9,24 @@ interface ReportCardProps {
   href: string;
 }
 
-const ReportCard: React.FC<ReportCardProps> = ({ key, title, description, href, className }) => {
+const ReportCard: React.FC<ReportCardProps> = ({
+  key,
+  title,
+  description,
+  href,
+  className,
+}) => {
   return (
-    <div className={cn(`w-fit bg-slate-100 mx-auto my-2 py-2 px-5 border rounded-md`,className)}>
-    <div className="font-bold">
-      <h2>{title}</h2></div>
-        <div className="">{description}</div> 
+    <div
+      className={cn(
+        `w-fit bg-slate-100 mx-auto my-2 py-2 px-5 border rounded-md`,
+        className
+      )}
+    >
+      <div className="font-bold">
+        <h2>{title}</h2>
+      </div>
+      <div className="">{description}</div>
     </div>
 
     // <div className="flex flex-col px-6 h-12">
@@ -29,6 +41,3 @@ const ReportCard: React.FC<ReportCardProps> = ({ key, title, description, href, 
 };
 
 export default ReportCard;
-
-
-

@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-
 interface ListIemProps {
   children: ReactNode;
   className?: String;
 }
 
-const AccountPageItems: React.FC<ListIemProps> = ({children, className}) => {
-  return <div className={cn(`
+const AccountPageItems: React.FC<ListIemProps> = ({ children, className }) => {
+  return (
+    <div
+      className={cn(
+        `
   items-start
   justify-center
   w-full
@@ -20,15 +22,13 @@ const AccountPageItems: React.FC<ListIemProps> = ({children, className}) => {
   mx-auto
   my-2
   border
-  `, className)
-  }>
-    
-      <div className="font-medium">
-        {children}
-      </div>
-
-    
-    </div>;
+  `,
+        className
+      )}
+    >
+      <div className="font-medium">{children}</div>
+    </div>
+  );
 };
 
 export default AccountPageItems;
