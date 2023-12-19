@@ -139,7 +139,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         </div>
         <br></br>
 
-        <SheetClose>
+        <SheetClose asChild>
           <Button
             disabled={!agreed}
             onClick={(e) => {
