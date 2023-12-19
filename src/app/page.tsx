@@ -36,32 +36,34 @@ export default function Home() {
       <MaxWidthWrapper>
         <div className="flex flex-col justify-between w-full h-full">
           <HomeSearchBar />
-          <Sheet>
-            {/* {1 && 
-            <SheetTrigger asChild className="w-full z-10 absolute ">
-              <Button className="w-full">Assigned Tasks</Button>
-            </SheetTrigger>
-            } */}
-
-            <div className="flex flex-col w-full gap-2 justify-between">
+          <div className="flex flex-col w-full gap-2 justify-between">
+            <Sheet>
               {1 && (
-                <SheetTrigger asChild className="w-full z-10 ">
+                <SheetTrigger asChild className="w-full z-10">
                   <Button className="w-full">Assigned Tasks</Button>
                 </SheetTrigger>
               )}
+              <SheetContent side="bottom">
+                <SheetHeader>
+                  <SheetTitle>Assigned Taks</SheetTitle>
+                </SheetHeader>
+                Enter Tasks Here
+              </SheetContent>
+            </Sheet>
 
+            <Sheet>
               <SheetTrigger asChild className="w-full z-10 ">
                 <Button className="w-full">Report New Incident</Button>
               </SheetTrigger>
-            </div>
 
-            <SheetContent side="bottom">
-              <SheetHeader>
-                <SheetTitle>Report New Incident</SheetTitle>
-              </SheetHeader>
-              <NewIncidentSheet />
-            </SheetContent>
-          </Sheet>
+              <SheetContent side="bottom">
+                <SheetHeader>
+                  <SheetTitle>Report New Incident</SheetTitle>
+                </SheetHeader>
+                <NewIncidentSheet />
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </MaxWidthWrapper>
     </>
