@@ -9,7 +9,7 @@ function SignInPage() {
 }
 
 export default function DemoCreateAccount() {
-    const [otpSent, setOtpSent] = useState<boolean>(false);
+  const [otpSent, setOtpSent] = useState<boolean>(false);
   const [showOTPError, setSetshowOTPError] = useState<boolean>(false);
   const phoneRef = useRef<HTMLInputElement>(null);
   const otpRef = useRef<HTMLInputElement>(null);
