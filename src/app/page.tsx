@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import dynamic from "next/dynamic";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 const MapNoSSR = dynamic(() => import("@/components/Map"), {
@@ -20,6 +21,11 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
+  if (typeof window !== "undefined")
+    if (window.localStorage.getItem("UserObject") === null) {
+      redirect("/signup");
+    }
+
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
 
   return (
@@ -36,17 +42,34 @@ export default function Home() {
       <MaxWidthWrapper>
         <div className="flex flex-col justify-between w-full h-full">
           <HomeSearchBar />
-          <Sheet>
-            <SheetTrigger asChild className="w-full z-10">
-              <Button className="w-full">Report New Incident</Button>
-            </SheetTrigger>
-            <SheetContent side="bottom">
-              <SheetHeader>
-                <SheetTitle>Report New Incident</SheetTitle>
-              </SheetHeader>
-              <NewIncidentSheet />
-            </SheetContent>
-          </Sheet>
+          <div className="flex flex-col w-full gap-2 justify-between">
+            <Sheet>
+              {1 && (
+                <SheetTrigger asChild className="w-full z-10">
+                  <Button className="w-full">Assigned Tasks</Button>
+                </SheetTrigger>
+              )}
+              <SheetContent side="bottom">
+                <SheetHeader>
+                  <SheetTitle>Assigned Taks</SheetTitle>
+                </SheetHeader>
+                Enter Tasks Here
+              </SheetContent>
+            </Sheet>
+
+            <Sheet>
+              <SheetTrigger asChild className="w-full z-10 ">
+                <Button className="w-full">Report New Incident</Button>
+              </SheetTrigger>
+
+              <SheetContent side="bottom">
+                <SheetHeader>
+                  <SheetTitle>Report New Incident</SheetTitle>
+                </SheetHeader>
+                <NewIncidentSheet />
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </MaxWidthWrapper>
     </>

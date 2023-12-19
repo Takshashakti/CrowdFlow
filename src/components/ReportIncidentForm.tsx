@@ -205,6 +205,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         >
           Submit Report
         </Button>
+
       </form>
     </div>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon, LatLng } from "leaflet";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Marker, useMap } from "react-leaflet";
