@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
-const TEST_OTP = "696969";
+const TEST_OTP = "0000";
 
 function SignInPage() {
   
@@ -78,9 +78,11 @@ export default function DemoCreateAccount() {
             onClick={(e) => {
               e.preventDefault();
               if (otpRef.current?.value === TEST_OTP) {
-                localStorage.setItem("authToken", "6969");
+                localStorage.setItem("authToken", "0000");
                 void router.push("/");
               } else setSetshowOTPError(true);
+
+              fetch("")
             }}
           >
             Sign In

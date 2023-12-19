@@ -50,8 +50,8 @@ export default function DemoCreateAccount() {
         fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/user/register", {
             method: "POST",
             body: JSON.stringify(formData),
-            mode: "no-cors"
-        }).then(console.log)
+            // mode: "no-cors"
+        }).then(async res => console.log(await res.text()))
       }}>
         <div className="flex flex-col gap-7"></div>
         <div className="flex flex-col">
