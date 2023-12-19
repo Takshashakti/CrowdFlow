@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
-export default function DashboardSidePannel({
+export default function DashboardSidePannel(
+  {
   activeTab,
 }: {
   activeTab: string;
-}) {
+}
+){
+  const [profile, setProfile] = useState({
+    name: 'Shounak Ghosh',
+    email: 'shounak_paul@whatever.com',
+    phoneNumber: '+1234567890',
+    address: 'Kakatiya Hills, Vasanth Nagar Colony, Nizampet, Hyderabad, Telangana',
+    gender:'Male',
+    age: '50'
+    // Add more profile information here
+});
   return (
     <aside
       id="default-sidebar"
@@ -106,6 +117,16 @@ export default function DashboardSidePannel({
             </Link>
           </li>
         </ul>
+        <div className="fixed py-[25vh]">
+        <div className="font-bold justify-center mx-auto">Account Details</div>
+        <div className="font-md justify-center mx-auto"><b>Name:</b> {profile.name}</div>
+        <div className="font-md justify-center mx-auto"><b>Email:</b> {profile.email}</div>
+        <div className="font-md justify-center mx-auto"><b>Phone Number:</b> {profile.phoneNumber}</div>
+        <div className="font-md justify-center mx-auto"><b>Age:</b> {profile.age}</div>
+        <div className="font-md justify-center mx-auto"><b>Gender:</b> {profile.gender}</div>
+        <div className="font-md justify-center mx-auto"><b>Address:</b> {profile.address}</div>
+        </div>
+        
       </div>
     </aside>
   );
