@@ -90,11 +90,7 @@ export default function Home() {
                     <SheetTitle>Assigned Tasks</SheetTitle>
                   </SheetHeader>
                   <div className="overflow-scroll max-h-[25rem]">
-                    {task.map((t : any, index) => {
-                      return (
-                        <TaskViewItems children={t.title} key={index}></TaskViewItems>
-                      );
-                    })}
+                    {/*  */}
                     <TaskViewItems children="Task 1" className="text-black"></TaskViewItems>
                     <TaskViewItems children="Task 2" className="text-black"></TaskViewItems>
                     <TaskViewItems children="Task 3" className="text-black"></TaskViewItems>
