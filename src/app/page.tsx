@@ -45,22 +45,13 @@ export default function Home() {
     (async () => {
       const user = JSON.parse(localStorage.getItem("UserObject") as string);
       const res = await fetch(
-        "https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?user_id=" +
+        "https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/getByUser?userId=" +
           user.id
       );
       const arr = await res.json();
       setTask(arr);
     })();
-  });
-
-  // useEffect(()=>{
-  //   (async()=>{
-  //     const user = JSON.parse(localStorage.getItem("UserObject") as string)
-  //     const res=await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?user_id="+user.id )
-  //     const arr=await res.json()
-  //     setTask(arr);
-  //   })()
-  // })
+  }, []);
 
   return (
     <div>
@@ -71,9 +62,7 @@ export default function Home() {
           setSelectedIncidentId("");
         }}
       >
-        <DialogContent>
           <IncidentDetails disasterID={selectedIncidentId} />
-        </DialogContent>
       </Dialog>
       <MaxWidthWrapper>
         <div className="flex flex-col justify-between w-full h-full">
