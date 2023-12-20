@@ -46,6 +46,17 @@ const MapComponent = ({
       console.log(issuesRes);
       setIssues(issuesRes);
     })();
+    
+    const interval = setInterval(async () => {
+      const res = await fetch(
+        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/getall"
+      );
+      const issuesRes = (await res.json()) as Issue[];
+      console.log(issuesRes);
+      setIssues(issuesRes);
+    }, 1000 * 60);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -55,9 +66,7 @@ const MapComponent = ({
       {/* <Button className="absolute z-5">Locate Me</Button> */}
 
       {issues.map((iss) =>
-        iss.latitude === null ? (
-          null
-        ) : (
+        iss.latitude === null ? null : (
           <Marker
             key={iss.id}
             position={[iss.latitude, iss.longitude]}

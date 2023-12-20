@@ -24,6 +24,7 @@ import axios from "axios";
 import { SheetClose } from "./ui/sheet";
 import { Card, CardContent } from "./ui/card";
 import { useGeolocation } from "@uidotdev/usehooks";
+import { redirect } from "next/navigation";
 
 const reverseGeocode = async (lat: string, lng: string) => {
   const res = await axios.get<ReverseGeocodeResponse>(
@@ -88,8 +89,23 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
   }, [lat, lng]);
 
   useEffect(() => {
-    (async () => {
-      if (true) {
+    if (address !== null) console.log(JSON.stringify(address));
+  }, [address]);
+
+  useEffect(() => {
+    let token = "";
+    if (typeof window !== "undefined") {
+      let user = JSON.parse(
+        window.localStorage.getItem("UserObject") as string
+      );
+      console.log(user);
+      token = user.token
+    }
+
+    if (address) {
+      const { city, state, district } = address.address;
+      console.log(city + state + district);
+      (async () => {
         const res = await fetch(
           "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
           {
@@ -97,6 +113,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
             mode: "no-cors",
             headers: {
               "content-type": "application/json",
+              "Authorization": token,
             },
             body: JSON.stringify({
               user_id: 1,
@@ -104,7 +121,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
               description: reportDescription,
               type: reportCategory,
               // images: selectedImages,
-              image_url: "",
+              image_url: JSON.stringify(address),
               city: "city",
               state: "state",
               district: "district",
@@ -115,9 +132,9 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         );
 
         console.log(await res.json());
-      }
-    })();
-  }, [props.submitted]);
+      })();
+    }
+  }, [props.submitted, address]);
 
   return (
     <div className="flex flex-col px-6 ">
@@ -205,7 +222,12 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         <br></br>
 
         <Button
-          disabled={!agreed}
+          disabled={
+            !agreed ||
+            address === null ||
+            reportName === "" ||
+            reportDescription === ""
+          }
           onClick={(e) => {
             e.preventDefault();
             props.setSubmitted(true);

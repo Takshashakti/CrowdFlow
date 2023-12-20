@@ -13,118 +13,118 @@ export const INCIDENT_CATEGORIES = [
 export const Reports_Timeline = [
   {
     label: "Jan",
-    reports: 20,
-    resolved: 10,
+    reports: 1200,
+    resolved: 900,
   },
   {
     label: "Feb",
-    reports: 18,
-    resolved: 11,
+    reports: 900,
+    resolved: 600,
   },
   {
     label: "Mar",
-    reports: 15,
-    resolved: 8,
+    reports: 850,
+    resolved: 1100,
   },
   {
     label: "Apr",
-    reports: 19,
-    resolved: 14,
+    reports: 950,
+    resolved: 700,
   },
   {
     label: "May",
-    reports: 10,
-    resolved: 15,
+    reports: 900,
+    resolved: 650,
   },
   {
     label: "Jun",
-    reports: 30,
-    resolved: 19,
+    reports: 2000,
+    resolved: 1000,
   },
   {
     label: "Jul",
-    reports: 33,
-    resolved: 20,
+    reports: 1200,
+    resolved: 900,
   },
   {
     label: "Aug",
-    reports: 20,
-    resolved: 12,
+    reports: 1000,
+    resolved: 600,
   },
   {
     label: "Sep",
-    reports: 18,
-    resolved: 10,
+    reports: 600,
+    resolved: 400,
   },
   {
     label: "Oct",
-    reports: 9,
-    resolved: 6,
+    reports: 500,
+    resolved: 300,
   },
   {
     label: "Nov",
-    reports: 8,
-    resolved: 4,
+    reports: 410,
+    resolved: 310,
   },
   {
     label: "Dec",
-    reports: 5,
-    resolved: 3,
+    reports: 360,
+    resolved: 210,
   },
 ];
 
 export const Top_5_Incedent_Category = [
   {
     category: "Water Quality",
-    reports_count: 50,
-    resolved_count: 36,
+    reports_count: 2300,
+    resolved_count: 1800,
   },
   {
     category: "Pollution",
-    reports_count: 38,
-    resolved_count: 32,
+    reports_count: 2000,
+    resolved_count: 1800,
   },
   {
     category: "Water Leakage",
-    reports_count: 33,
-    resolved_count: 33,
+    reports_count: 1750,
+    resolved_count: 1600,
   },
   {
     category: "Water Logging",
-    reports_count: 28,
-    resolved_count: 25,
+    reports_count: 1500,
+    resolved_count: 1230,
   },
   {
     category: "Water Shortage",
-    reports_count: 25,
-    resolved_count: 24,
+    reports_count: 1300,
+    resolved_count: 1100,
   },
 ];
 
 export const Agewise_Report = [
   {
     range: "Below 21",
-    count: 62,
+    count: 2000,
   },
   {
     range: "21 - 30",
-    count: 107,
+    count: 5000,
   },
   {
     range: "31 - 40",
-    count: 81,
+    count: 1500,
   },
   {
     range: "41 - 50",
-    count: 47,
+    count: 800,
   },
   {
     range: "51 - 60",
-    count: 22,
+    count: 500,
   },
   {
     range: "Above 61",
-    count: 8,
+    count: 200,
   },
 ];
 

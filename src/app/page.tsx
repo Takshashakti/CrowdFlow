@@ -33,27 +33,37 @@ type task={
 }
 
 export default function Home() {
-  const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
-  const [task, setTask] = useState([]);
-  useEffect(()=>{
-    (async()=>{
-      const user: task = JSON.parse(localStorage.getItem("UserObject") as string)
-      const res=await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/assign="+user.id )
-      const arr=await res.json()
-      setTask(arr);
-    })()
-  })
-  useEffect(() => {
-    if (Array.isArray(task)) {
-      task.forEach((item, index) => {
-        if (item !== null) {
-          console.log(`Task ${index}:`, item);
-        }
-      });
+  if (typeof window !== "undefined")
+    if (window.localStorage.getItem("UserObject") === null) {
+      redirect("/signup");
     }
-  }, [task]);
 
+  const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
 
+  const [task, setTask] = useState({
+    task1: "Task1",
+    task2: "Task2",
+    task3: "Task3",
+    task4: "Task4",
+    task5: "Task5",
+    task6: "Task6",
+    task7: "Task7",
+    task8: "Task8",
+    task9: "Task9",
+    task10: "Task10",
+  });
+  useEffect(() => {
+    (async () => {
+      const user = JSON.parse(localStorage.getItem("UserObject") as string);
+      const res = await fetch(
+        "https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/getByUser?userId=" +
+          user.id
+      );
+      const arr = await res.json();
+      setTask(arr);
+    })();
+  }, []);
+  
   return (
     <div>
       <MapNoSSR setSelectedIncidentId={setSelectedIncidentId} />
@@ -63,9 +73,7 @@ export default function Home() {
           setSelectedIncidentId("");
         }}
       >
-        <DialogContent>
-          <IncidentDetails disasterID={"1"} />
-        </DialogContent>
+          <IncidentDetails disasterID={selectedIncidentId} />
       </Dialog>
       <MaxWidthWrapper>
         <div className="flex flex-col justify-between w-full h-full">

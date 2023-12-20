@@ -122,7 +122,7 @@ export default function DashboardSidePannel({
             </Link>
           </li>
         </ul>
-        <div className="absolute bottom-0">
+        {/* <div className="absolute bottom-0">
           <div className="font-bold justify-center mx-auto">
             Account Details
           </div>
@@ -144,7 +144,7 @@ export default function DashboardSidePannel({
           <div className="font-md justify-center mx-auto">
             <b>Address:</b> {profile.address}
           </div>
-        </div>
+        </div> */}
       </div>
     </aside>
   );
