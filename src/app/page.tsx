@@ -53,7 +53,7 @@ export default function Home() {
                   <SheetTitle>Assigned Tasks</SheetTitle>
                 </SheetHeader>
                 <div className="overflow-scroll max-h-[25rem]">
-                <TaskViewItems className="border rounded-md">{task.task1}</TaskViewItems>
+                {/* <TaskViewItems className="border rounded-md">{task.task1}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task2}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task3}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task4}</TaskViewItems>
@@ -62,7 +62,7 @@ export default function Home() {
                 <TaskViewItems className="border rounded-md">{task.task7}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task8}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task9}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task10}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task10}</TaskViewItems> */}
                 </div>
               </SheetContent>
             </Sheet>
