@@ -5,23 +5,21 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Marker, useMap } from "react-leaflet";
 import CurrentLocationMarker from "./CurrentLocationMarker";
 
-const ISSUES = [
-  {
-    id: "0",
-    lat: 20.25,
-    lng: 85.82,
-  },
-  {
-    id: "1",
-    lat: 51.05,
-    lng: 0.09,
-  },
-  {
-    id: "2",
-    lat: 19,
-    lng: 78,
-  },
-];
+interface Issue {
+  id: number;
+  user_id: number;
+  title: string;
+  description: string;
+  image_url: string;
+  type: string;
+  latitude: number;
+  longitude: number;
+  city: string;
+  state: string;
+  district: string;
+  time: number;
+  incidents_id: number;
+}
 
 const MapComponent = ({
   setSelectedIncidentId,
@@ -29,6 +27,7 @@ const MapComponent = ({
   setSelectedIncidentId: Dispatch<SetStateAction<string>>;
 }) => {
   const [position, setPosition] = useState<LatLng | null>(null);
+  const [issues, setIssues] = useState<Issue[]>([]);
   const map = useMap();
   useEffect(() => {
     map.locate().on("locationfound", function (e) {
@@ -38,32 +37,45 @@ const MapComponent = ({
     });
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/getall"
+      );
+      const issuesRes = (await res.json()) as Issue[];
+      console.log(issuesRes);
+      setIssues(issuesRes);
+    })();
+  }, []);
+
   return (
     <>
       <CurrentLocationMarker position={position as LatLng} />
 
       {/* <Button className="absolute z-5">Locate Me</Button> */}
 
-      {ISSUES.map((issue) => (
-        <Marker
-          key={issue.id}
-          position={[issue.lat, issue.lng]}
-          icon={
-            new Icon({
-              iconUrl: "/waterIssueMarkerIcon.png",
-              iconSize: [50, 50],
-            })
-          }
-          eventHandlers={{
-            click: () => {
-              console.log(`Clicked on ${issue.id}`)
-              setSelectedIncidentId(issue.id)
+      {issues.map((iss) =>
+        iss.latitude === null ? (
+          null
+        ) : (
+          <Marker
+            key={iss.id}
+            position={[iss.latitude, iss.longitude]}
+            icon={
+              new Icon({
+                iconUrl: "/waterIssueMarkerIcon.png",
+                iconSize: [50, 50],
+              })
             }
-          }}
-        >
-          {/* <Popup>This is an issue</Popup> */}
-        </Marker>
-      ))}
+            eventHandlers={{
+              click: () => {
+                console.log(`Clicked on ${iss.id}`);
+                setSelectedIncidentId(`${iss.id}`);
+              },
+            }}
+          ></Marker>
+        )
+      )}
     </>
   );
 };

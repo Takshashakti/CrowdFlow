@@ -1,5 +1,6 @@
 import React from "react";
 import { json } from "stream/consumers";
+import { Button } from "./ui/button";
 
 export default function ConfirmUserByAuthority({
   name,
@@ -8,6 +9,8 @@ export default function ConfirmUserByAuthority({
   address,
   gender,
   age,
+  callback,
+  buttonName
 }: {
   name: string;
   email: string;
@@ -15,6 +18,8 @@ export default function ConfirmUserByAuthority({
   address: string;
   gender: string;
   age: number;
+  buttonName: string;
+  callback: () => void;
 }) {
   const user = {
     name,
@@ -24,6 +29,9 @@ export default function ConfirmUserByAuthority({
     gender,
     address,
   };
+
+  
+
   return (
     <>
       <div className="p-3 rounded bg-gray-50 flex flex-col">
@@ -53,12 +61,12 @@ export default function ConfirmUserByAuthority({
           </h3>
         </div>
         <div className="flex justify-end mx-8">
-          <button
-            type="submit"
+          <Button
+            onClick={callback}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center"
           >
-            Submit
-          </button>
+            {buttonName}
+          </Button>
         </div>
       </div>
     </>

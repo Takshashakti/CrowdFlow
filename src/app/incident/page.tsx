@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils";
 import { Check, Cross, CrossIcon, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useState } from "react";
+
 
 const MapComponent = dynamic(() => import("@/components/MapComponent"), {
   ssr: false,
@@ -26,7 +28,7 @@ const MapComponent = dynamic(() => import("@/components/MapComponent"), {
 export default function IncidentTemp() {
   return (
     <>
-    <IncidentDetails disasterID="hsdfikjgh" />
+    <IncidentDetails disasterID="1" />
     </>
   );
 }

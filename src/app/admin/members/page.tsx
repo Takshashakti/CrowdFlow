@@ -6,10 +6,12 @@ import ConfirmUserByAuthority from "@/components/ConfirmUserByAuthority";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 type User = {
   name: string;
   age: number;
+  id: number;
   phnNo: string;
   gender: string;
 };
@@ -17,6 +19,7 @@ type User = {
 function DashboardMembers() {
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const phoneNumRef = useRef<HTMLInputElement>(null);
+  const [users, setUsers] = useLocalStorage<User[]>("users", []);
 
   const searchForUsers = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -31,6 +34,18 @@ function DashboardMembers() {
     const js = await userAll.json();
     setSearchResults(js);
   };
+
+  function addUserToMinucipality(id: User) {
+    let ut = users;
+    ut.push( id );
+    setUsers(ut);
+  }
+
+  function removeUserFromMinucipality(id: User) {
+    let ut = users;
+    ut = ut.filter((user) => user.id !== id.id);
+    setUsers(ut);
+  }
 
   return (
     <>
@@ -74,13 +89,42 @@ function DashboardMembers() {
                 key={ind}
                 name={data.name}
                 age={data.age}
-                email="sa@fd.f"
+                email="contact@gmail.com"
                 phoneNumber={data.phnNo}
                 gender={data.gender}
-                address="dsff"
+                address="N.A."
+                buttonName="Add"
+                callback={() => { addUserToMinucipality(data) }}
               />
             );
           })}
+
+          <hr />
+          <hr />
+
+          <div className="p-3 rounded bg-gray-50 mb-3">
+          <h3 className="text-xl font-bold">Members</h3>
+          </div>  
+
+          {
+            users.map((data, ind) => {
+              return (
+                <ConfirmUserByAuthority
+                  key={ind}
+                  name={data.name}
+                  age={data.age}
+                  email="contact@gmail.com"
+                  phoneNumber={data.phnNo}
+                  gender={data.gender}
+                  address="N.A."
+                  buttonName="Remove"
+                  callback={() => { removeUserFromMinucipality(data) }}
+              />
+            );
+          })}
+          
+
+          
       </div>
     </>
   );
