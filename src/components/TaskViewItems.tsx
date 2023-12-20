@@ -71,9 +71,9 @@ const TaskViewItems: React.FC<ListIemProps> = ({ children, className }) => {
         </Dialog>
       )}
       {taskResolved && (
-        <DialogTrigger className="bg-black w-[35%] px-1 py-2 text-center items-center rounded-md text-white">
+        <div className="bg-black w-[35%] px-1 py-2 text-center items-center rounded-md text-white">
           Task Resolved
-        </DialogTrigger>
+        </div>
       )}
     </div>
   );
