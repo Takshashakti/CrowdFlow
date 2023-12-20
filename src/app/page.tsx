@@ -25,17 +25,28 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 export default function Home() {
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
   const [task, setTask] = useState({
-    task1: "Task1",
-    task2: "Task2",
-    task3: "Task3",
-    task4: "Task4",
-    task5: "Task5",
-    task6: "Task6",
-    task7: "Task7",
-    task8: "Task8",
-    task9: "Task9",
-    task10: "Task10",
-  });
+
+<!--    task1 : "Task1", 
+   task2 : "Task2",
+    task3 : "Task3",
+    task4 : "Task4",
+    task5 : "Task5",
+    task6 : "Task6",
+    task7 : "Task7",
+    task8 : "Task8",
+    task9 : "Task9",
+    task10 : "Task10", -->
+});
+  useEffect(()=>{
+    (async()=>{
+      const user = JSON.parse(localStorage.getItem("UserObject") as string)
+      const res=await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?user_id="+user.id )
+      const arr=await res.json()
+      setTask(arr);
+    })()
+  })
+  
+
   // useEffect(()=>{
   //   (async()=>{
   //     const user = JSON.parse(localStorage.getItem("UserObject") as string)
@@ -45,10 +56,7 @@ export default function Home() {
   //   })()
   // })
 
-  if (typeof window !== "undefined")
-    if (window.localStorage.getItem("UserObject") === null) {
-      redirect("/signup");
-    }
+
 
   return (
     <div>

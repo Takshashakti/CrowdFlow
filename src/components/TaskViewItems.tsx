@@ -8,6 +8,7 @@ import {
 import { ReactNode, useState } from "react";
 import { DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
+import { json } from "stream/consumers";
 
 interface ListIemProps {
   children: ReactNode;
@@ -41,8 +42,12 @@ const TaskViewItems: React.FC<ListIemProps> = ({ children, className }) => {
       {!taskAccept && (
         <Dialog>
           <DialogTrigger
-            onClick={() => setAccepted(true)}
-            className="bg-black w-[35%] px-2 py-2 text-center items-center rounded-md text-white"
+            onClick={async() => {
+                const user = JSON.parse(localStorage.getItem("UserObject") as string)
+                console.log(user)
+                await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/update?id="+ user.id +"&status=Accepted")
+                setAccepted(true)}}
+            className="bg-red-600 w-[35%] px-2 py-2 text-center items-center rounded-md text-white"
           >
             Accept Task
           </DialogTrigger>
@@ -59,8 +64,12 @@ const TaskViewItems: React.FC<ListIemProps> = ({ children, className }) => {
       {taskAccept && !taskResolved && (
         <Dialog>
           <DialogTrigger
-            onClick={() => setResolveded(true)}
-            className="bg-black w-[35%] px-2 py-2 text-center items-center rounded-md text-white"
+            onClick={async() => {
+                const user = JSON.parse(localStorage.getItem("UserObject") as string)
+                console.log(user)
+                await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/update?id="+ user.id +"&status=Resolved")
+                setResolveded(true)}}
+            className="bg-yellow-400 w-[35%] px-2 py-2 text-center items-center rounded-md text-white"
           >
             Resolve Task
           </DialogTrigger>
@@ -71,9 +80,9 @@ const TaskViewItems: React.FC<ListIemProps> = ({ children, className }) => {
         </Dialog>
       )}
       {taskResolved && (
-        <div className="bg-black w-[35%] px-1 py-2 text-center items-center rounded-md text-white">
+        <DialogTrigger className="bg-green-600 w-[35%] px-1 py-2 text-center items-center rounded-md text-white">
           Task Resolved
-        </div>
+        </DialogTrigger>
       )}
     </div>
   );
