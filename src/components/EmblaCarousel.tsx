@@ -6,8 +6,8 @@ import { X } from 'lucide-react';
 import { Button } from './ui/button';
 
 type PropType = {
-  slides: Blob[]
-  deleteSlide: (index: number) => void
+  slides: Blob[] | string[]
+  deleteSlide?: (index: number) => void
   options?: EmblaOptionsType
 }
 
@@ -24,12 +24,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>
-              <Button className="absolute top-0 right-0 -mr-1 -mt-1 p-0 h-5 w-5" variant="destructive" onClick={() => deleteSlide(index)}>
+              <Button className="absolute top-0 right-0 -mr-1 -mt-1 p-0 h-5 w-5" variant="destructive" onClick={() => { if(deleteSlide) deleteSlide(index)}}>
                 <X className="h-3 w-3" />
               </Button>
               <img
                 className="embla__slide__img object-contain h-20 w-10"
-                src={URL.createObjectURL(blob)}
+                src={typeof blob === "string" ? blob : URL.createObjectURL(blob as Blob)}
                 alt="Your alt text"
               />
             </div>
