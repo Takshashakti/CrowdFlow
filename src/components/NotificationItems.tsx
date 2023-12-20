@@ -48,7 +48,7 @@ const NotificationItems: React.FC<ListIemProps> = ({ children, className }) => {
             <DialogDescription>
               This action cannot be undone. This will permanently delete your
               account and remove your data from our servers.
-            </DialogDescription>
+            </DialogDescription>  
           </DialogHeader>
         </DialogContent>
       </Dialog>
