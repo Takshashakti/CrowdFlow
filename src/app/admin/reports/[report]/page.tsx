@@ -1,84 +1,132 @@
-// "use client";
+"use client";
 
-// import React, { useEffect } from "react";
-
-// type DisasterDetails = {
-//   id: number;
-//   title: string;
-//   type: string;
-//   avg_loc: string;
-//   address: string;
-//   status: string;
-//   num_reports: number;
-//   credibility: number;
-// };
-
-// export default function page(props: any) {
-//   const [disasterDetails, setDisasterDetails] =
-//     React.useState<DisasterDetails | null>(null);
-
-//   useEffect(() => {
-//     async function fetchDisasterDetails() {
-//       // const res = await fetch(`https://jsonplaceholder.typicode.com/todos/1`);
-//       //const data = await res.json();
-
-//       // Create a dummy data
-//       const data: DisasterDetails = {
-//         id: 1,
-//         title: "Flood in hyderabad",
-//         type: "Flood",
-//         avg_loc: "1.283, 103.843",
-//         address: "Blk 123, Clementi Ave 3, #01-11, 231534",
-//         status: "Ongoing",
-//         num_reports: 10,
-//         credibility: 0.8,
-//       };
-//       setDisasterDetails(data);
-//     }
-//     fetchDisasterDetails();
-//   }, []);
-
-//   const getStatusColor = (status: string | undefined) => {
-//     if (status === "Ongoing") {
-//       return "bg-orange-500";
-//     } else if (status === "Resolved") {
-//       return "bg-blue-500";
-//     } else {
-//       return "bg-red-500";
-//     }
-//   };
-
-//   return (
-//     <>
-//       <h1 className="text-3xl font-bold text-justify pt-5 pb-2">
-//         {disasterDetails?.title}
-//       </h1>
-//     </>
-//   );
-// }
-
-import React from "react";
-import EmblaCarousel from "../../../../components/EmblaCarouselDashboard";
+import React, { use, useEffect } from "react";
+import EmblaCarousel from "../../../../components/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel-react";
 import "../../../css/sandbox.css";
 import "../../../css/embla.css";
+import DashboardSidePannel from "@/components/DashboardSidePannel";
 
-const OPTIONS: EmblaOptionsType = {};
+const OPTIONS: EmblaOptionsType = { dragFree: true, containScroll: "trimSnaps" };
 const SLIDE_COUNT = 5;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
+type Report = {
+  id: number;
+  user_id: number;
+  description: string;
+  image_url: string;
+  type: string;
+  incidents_id: number;
+  title: string;
+  latitude: number;
+  longitude: number;
+  city: string | null; // Assuming 'address?.address.city' may be null
+  state: string | null; // Assuming 'address?.address.state' may be null
+  district: string | null; // Assuming 'address?.address.district' may be null
+};
+
+type Incident = {
+  id: number,
+  city: string
+  state: string
+  district: string
+  statis: string
+};
+
+
+
 export default function Report({ params }: { params: { report: string } }) {
+  // const { incidentId } = params;
+
+  const [reportsData, setReportsData] = React.useState<Report[]>([{
+    id: 1,
+    user_id: 1,
+    title: "reportTitle",
+    description: "reportDescription",
+    image_url: "",
+    incidents_id: 0,
+    type: "reportCategory",
+    latitude: 69.42,
+    longitude: 69.42,
+    city: "exampleCity", // Replace with actual city or null
+    state: "exampleState", // Replace with actual state or null
+    district: "exampleDistrict", // Replace with actual district or null
+  }]);
+
+  const [incidentTitle, setIncidentTitle] = React.useState<string>("");
+  const [images, setImages] = React.useState<string[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/getall"
+      );
+
+      const resJ = await res.json();
+      // const resJ2 = resJ.filter((report: Report) => report.incidents_id === parseInt(params.report));
+      
+      // let incidents: any = {};
+      // for (let i = 0; i < resJ.length; i++) {
+      //   if (resJ[i].incidents_id === parseInt(params.report)) {
+      //     if (incidents[resJ[i].incidents_id] === undefined) {
+      //       incidents[resJ[i].incidents_id] = [];
+      //     }
+      //     incidents[resJ[i].incidents_id].push(resJ[i]);
+      //   }
+      // }
+
+      let incidents: Report[] = [];
+      for (let i = 0; i < resJ.length; i++) {
+        if (resJ[i].incidents_id === parseInt(params.report)) {
+          incidents.push(resJ[i]);
+        }
+      }
+
+      // setIncidentTitle(incidents[0][0].title);
+      setIncidentTitle("Dummy Report Title");
+      setReportsData(incidents);
+
+      // temp
+      setImages(["https://picsum.photos/200/300?asd=1", "https://picsum.photos/200/300?asd=31", "https://picsum.photos/200/300?asd=13", "https://picsum.photos/200/300?asd=231", "https://picsum.photos/200/300?asd=431", "https://picsum.photos/200/300?asd=21", "https://picsum.photos/200/300?asd=21"]);
+    })();
+  }, []);
+
   return (
     <>
-      <div className="p-5">
-        <div>hiii</div>
-        {/* <section className="sandbox__carousel">
-          <EmblaCarousel slides={SLIDES} options={OPTIONS} />
-        </section> */}
-        <div className="flex">
-          <div className="">photo</div>
-          <div>photo</div>
+      <DashboardSidePannel activeTab="report" />
+
+      <div className="mx-[22%] w-[75%]">
+        
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="text-4xl font-bold">{incidentTitle}</h1>
         </div>
+
+        <br /> <br />
+
+        <div className="flex flex-col justify-center items-center w-[50?vh]">
+        <EmblaCarousel slides={images} options={OPTIONS}/>
+        </div>
+
+        <br /> <br />
+
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="text-4xl font-bold">Descriptions:</h1>
+        </div>
+        
+        <br />
+
+        {
+          reportsData.map((report, ind) => (
+            <div className="flex flex-col justify-center items-center bg-slate-200 rounded-2xl mx-auto my-10 py-10" key={ind}>
+              <h1 className="text-2xl font-bold">{report.title}</h1>
+              <p className="text-xl">{report.description}</p>
+            </div>
+          ))
+        }
+        
+        
+
       </div>
     </>
   );
