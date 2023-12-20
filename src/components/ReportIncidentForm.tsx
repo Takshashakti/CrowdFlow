@@ -88,36 +88,42 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
   }, [lat, lng]);
 
   useEffect(() => {
-    (async () => {
-      if (true) {
-        const res = await fetch(
-          "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
-          {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({
-              user_id: 1,
-              title: reportName,
-              description: reportDescription,
-              type: reportCategory,
-              // images: selectedImages,
-              image_url: "",
-              city: "city",
-              state: "state",
-              district: "district",
-              latitude: parseFloat(lat as string),
-              longitude: parseFloat(lng as string),
-            }),
-          }
-        );
+    if (address !== null) console.log(JSON.stringify(address));
+  }, [address]);
 
-        console.log(await res.json());
-      }
-    })();
-  }, [props.submitted]);
+  useEffect(() => {
+    if (address) {
+      const { city, state, district } = address.address;
+      console.log(city+state+district);
+      (async () => {
+          const res = await fetch(
+            "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
+            {
+              method: "POST",
+              mode: "no-cors",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                user_id: 1,
+                title: reportName,
+                description: reportDescription,
+                type: reportCategory,
+                // images: selectedImages,
+                image_url: JSON.stringify(address),
+                city: "city",
+                state: "state",
+                district: "district",
+                latitude: parseFloat(lat as string),
+                longitude: parseFloat(lng as string),
+              }),
+            }
+          );
+
+          console.log(await res.json());
+      })();
+    }
+  }, [props.submitted, address]);
 
   return (
     <div className="flex flex-col px-6 ">
@@ -205,7 +211,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         <br></br>
 
         <Button
-          disabled={!agreed}
+          disabled={(!agreed || address === null || reportName === "" || reportDescription === "")}
           onClick={(e) => {
             e.preventDefault();
             props.setSubmitted(true);
