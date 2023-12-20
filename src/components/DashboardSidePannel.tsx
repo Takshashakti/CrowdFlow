@@ -50,11 +50,13 @@ export default function DashboardSidePannel({
           <li className="group">
             <Link
               href={`${
-                activeTab == "dashboard" ? "admin/reports" : "./reports"
+                activeTab == "dashboard" ? "admin/reports" : "./reports" ||
+                activeTab == "report-assign" ? "./" : "./reports" ||
+                "./reports"
               }`}
               className={`flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900 ${
-                activeTab == "report" &&
-                "bg-violet-500 text-white group-hover:bg-violet-800"
+                activeTab == "report" || activeTab == "report-assign" ?
+                "bg-violet-500 text-white group-hover:bg-violet-800":""
               }`}
             >
               <svg
@@ -73,7 +75,8 @@ export default function DashboardSidePannel({
           </li>
           <li className="group">
             <Link
-              href={`${activeTab == "dashboard" ? "admin/map" : "./map"}`}
+              href={`${activeTab == "dashboard" ? "admin/map" : "./map" || 
+              activeTab == "report-assign" ? "../map" : "./map"}`}
               className={`flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900 ${
                 activeTab == "map" &&
                 "bg-violet-500 text-white group-hover:bg-violet-800"
@@ -96,7 +99,8 @@ export default function DashboardSidePannel({
           <li className="group">
             <Link
               href={`${
-                activeTab == "dashboard" ? "admin/members" : "./members"
+                activeTab == "dashboard" ? "admin/members" : "./members" || 
+                activeTab == "report-assign" ? "../members" : "./members"}
               }`}
               className={`flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900 ${
                 activeTab == "members" &&
