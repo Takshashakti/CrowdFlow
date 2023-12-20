@@ -24,6 +24,7 @@ import axios from "axios";
 import { SheetClose } from "./ui/sheet";
 import { Card, CardContent } from "./ui/card";
 import { useGeolocation } from "@uidotdev/usehooks";
+import { redirect } from "next/navigation";
 
 const reverseGeocode = async (lat: string, lng: string) => {
   const res = await axios.get<ReverseGeocodeResponse>(
@@ -92,35 +93,45 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
   }, [address]);
 
   useEffect(() => {
+    let token = "";
+    if (typeof window !== "undefined") {
+      let user = JSON.parse(
+        window.localStorage.getItem("UserObject") as string
+      );
+      console.log(user);
+      token = user.token
+    }
+
     if (address) {
       const { city, state, district } = address.address;
-      console.log(city+state+district);
+      console.log(city + state + district);
       (async () => {
-          const res = await fetch(
-            "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
-            {
-              method: "POST",
-              mode: "no-cors",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify({
-                user_id: 1,
-                title: reportName,
-                description: reportDescription,
-                type: reportCategory,
-                // images: selectedImages,
-                image_url: JSON.stringify(address),
-                city: "city",
-                state: "state",
-                district: "district",
-                latitude: parseFloat(lat as string),
-                longitude: parseFloat(lng as string),
-              }),
-            }
-          );
+        const res = await fetch(
+          "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
+          {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "content-type": "application/json",
+              "Authorization": token,
+            },
+            body: JSON.stringify({
+              user_id: 1,
+              title: reportName,
+              description: reportDescription,
+              type: reportCategory,
+              // images: selectedImages,
+              image_url: JSON.stringify(address),
+              city: "city",
+              state: "state",
+              district: "district",
+              latitude: parseFloat(lat as string),
+              longitude: parseFloat(lng as string),
+            }),
+          }
+        );
 
-          console.log(await res.json());
+        console.log(await res.json());
       })();
     }
   }, [props.submitted, address]);
@@ -211,7 +222,12 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         <br></br>
 
         <Button
-          disabled={(!agreed || address === null || reportName === "" || reportDescription === "")}
+          disabled={
+            !agreed ||
+            address === null ||
+            reportName === "" ||
+            reportDescription === ""
+          }
           onClick={(e) => {
             e.preventDefault();
             props.setSubmitted(true);
