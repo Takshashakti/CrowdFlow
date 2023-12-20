@@ -6,7 +6,7 @@ import { Check, CrossIcon, X } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import { DialogHeader, DialogTitle, DialogContent } from "./ui/dialog";
+import { DialogHeader, DialogTitle, DialogContent, DialogTrigger } from "./ui/dialog";
 import axios from "axios";
 
 type PropType = {
@@ -35,6 +35,7 @@ const IncidentDetails: React.FC<PropType> = (props) => {
 
   useEffect(() => {
     (async () => {
+      if (props.disasterID === "") return;
       const res = await fetch(
         `https://crowdflowworkers.karmakarmeghdip.workers.dev/report/get?id=${props.disasterID}`
       );
@@ -270,12 +271,19 @@ const IncidentDetails: React.FC<PropType> = (props) => {
         {/* <span className='flex text-center items-center justify-center align-middle w-[50%] h-[5dvh] rounded-xl bg-slate-800 mx-2 font-bold font-sans text-white'>num_reports}</span>
             <span className='flex text-center items-center justify-center align-middle w-[50%] h-[5dvh] rounded-xl bg-slate-800 mx-2 font-bold font-sans text-white'>Credibility: {disasterDetails?.credibility}</span> */}
 
-        <Button className={cn("w-[50%] mx-2 bg-green-700")}>
-          <Check />
-        </Button>
-        <Button className={cn("w-[50%] mx-2 bg-red-700")}>
-          <X />
-        </Button>
+        <DialogTrigger asChild>
+          <Button className={cn("bg-green-700 w-[50%] mx-2")} onClick={() => {
+            fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/report/upvote?id=" + disasterDetails?.user_id)
+          }}>
+            <Check className="w-10 h-10" />
+          </Button>
+        </DialogTrigger>
+
+        <DialogTrigger asChild>
+          <Button className={cn("bg-green-700 w-[50%] mx-2")}>
+            <X className="w-10 h-10"/>
+          </Button>
+        </DialogTrigger>
       </div>
 
       <br />
