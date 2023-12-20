@@ -28,7 +28,7 @@ const MapComponent = dynamic(() => import("@/components/MapComponent"), {
 export default function IncidentTemp() {
   return (
     <>
-    <IncidentDetails disasterID="hsdfikjgh" />
+    <IncidentDetails disasterID="1" />
     </>
   );
 }
