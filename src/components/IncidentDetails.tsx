@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
 import { Check, CrossIcon, X } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
@@ -64,6 +64,10 @@ const IncidentDetails: React.FC<PropType> = (props) => {
       return "bg-red-500";
     }
   };
+  const [status, setStatus]=useState({
+    //fetch
+    //assign status
+  })
 
   return (
     <>
@@ -99,6 +103,64 @@ const IncidentDetails: React.FC<PropType> = (props) => {
 
       <br />
 
+      
+      {status=="reported" &&
+      <div>
+            <ol className="relative ml-5 border-s border-l-2 px-1 border-gray-400 dark:border-gray-900">                  
+               
+               <li className="mb-10 ms-2">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-4">Reported</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-gray-200 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Fowarded</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-gray-200 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Accepted</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Worker Assigned</h3>
+               </li> 
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 mb-0 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Resolved</h3>
+               </li>
+    
+    
+            </ol>
+        </div>}
+        {status=="forwarded" &&
+      <div>
+            <ol className="relative ml-5 border-s border-l-2 px-1 border-gray-400 dark:border-gray-900">                  
+               
+               <li className="mb-10 ms-2">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-4">Reported</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Fowarded</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-gray-200 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Accepted</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Worker Assigned</h3>
+               </li> 
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 mb-0 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Resolved</h3>
+               </li>
+    
+    
+            </ol>
+        </div>}
+        {status=="accepted" &&
       <div>
             <ol className="relative ml-5 border-s border-l-2 px-1 border-gray-400 dark:border-gray-900">                  
                
@@ -125,7 +187,93 @@ const IncidentDetails: React.FC<PropType> = (props) => {
     
     
             </ol>
-        </div>
+        </div>}
+        {status=="worker assigned" &&
+      <div>
+            <ol className="relative ml-5 border-s border-l-2 px-1 border-gray-400 dark:border-gray-900">                  
+               
+               <li className="mb-10 ms-2">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-4">Reported</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Fowarded</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Accepted</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Worker Assigned</h3>
+               </li> 
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 mb-0 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Resolved</h3>
+               </li>
+    
+    
+            </ol>
+        </div>}
+
+        {status=="resolved" &&
+      <div>
+            <ol className="relative ml-5 border-s border-l-2 px-1 border-gray-400 dark:border-gray-900">                  
+               
+               <li className="mb-10 ms-2">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-4">Reported</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Fowarded</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Accepted</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Worker Assigned</h3>
+               </li> 
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 rounded-full mt-1.5 mb-0 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Resolved</h3>
+               </li>
+               </ol>
+        </div>}
+              {status=="worker assigned" &&
+      <div>
+            <ol className="relative ml-5 border-s border-l-2 px-1 border-gray-400 dark:border-gray-900">                  
+               
+               <li className="mb-10 ms-2">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-4">Reported</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Fowarded</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute  w-3 h-3 bg-green-500 rounded-full mt-1.5. -start-1.5 border border-green dark:border-green-900 dark:bg-gray-900"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Accepted</h3>
+               </li>
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Worker Assigned</h3>
+               </li> 
+               <li className="mb-10 ms-4">
+                   <div className="absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 mb-0 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                   <h3 className="text-md font-semibold text-gray-900 dark:text-white text-left ml-3">Resolved</h3>
+               </li>
+    
+    
+            </ol>
+        </div>} 
+    
+    
+            
 
       <div className="w-full flex items-center justify-center">
         {/* <span className='flex text-center items-center justify-center align-middle w-[50%] h-[5dvh] rounded-xl bg-slate-800 mx-2 font-bold font-sans text-white'>num_reports}</span>
