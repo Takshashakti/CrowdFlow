@@ -112,46 +112,40 @@ function DashboardPage() {
 
       <div className="p-4 sm:ml-[calc(15vw)]">
         <h3 className="text-3xl font-bold text-gray-700 my-4">
-          Welcome, Naihati Municipality
+          Welcome, Authority
         </h3>
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="flex flex-col items-center justify-center h-24 rounded bg-violet-50">
             <p className="text-base text-gray-600">Total Reports</p>
-            <h3 className="text-3xl font-bold text-gray-700">
-              {total_reports}
-            </h3>
+            <h3 className="text-3xl font-bold text-gray-700">10000</h3>
           </div>
 
           <div className="flex flex-col items-center justify-center h-24 rounded bg-violet-100">
             <p className="text-base text-gray-600">Total Resolved</p>
-            <h3 className="text-3xl font-bold text-gray-700">
-              {pending_reports}
-            </h3>
+            <h3 className="text-3xl font-bold text-gray-700">7000</h3>
           </div>
 
           <div className="flex flex-col items-center justify-center h-24 rounded bg-violet-200">
             <p className="text-base text-gray-600">Total Resolve Pending</p>
-            <h3 className="text-3xl font-bold text-gray-700">
-              {resolved_reports}
-            </h3>
+            <h3 className="text-3xl font-bold text-gray-700">3000</h3>
           </div>
         </div>
         <div className="h-[calc(30vh)] mb-4 p-4 pb-8 rounded bg-gray-50 dark:bg-gray-800">
           <h3 className="text-2xl font-bold text-gray-700">Reports Timeline</h3>
           <Line
             data={{
-              labels: monthly_timeline.map((data: any) => data.label),
+              labels: Reports_Timeline.map((data: any) => data.label),
               datasets: [
                 {
                   label: "Reports",
-                  data: monthly_timeline.map((data: any) => data.reports),
+                  data: Reports_Timeline.map((data: any) => data.reports),
                   backgroundColor: "#723",
                   borderColor: "#f99",
                   fill: false,
                 },
                 {
                   label: "Resolved",
-                  data: monthly_timeline.map((data: any) => data.resolved),
+                  data: Reports_Timeline.map((data: any) => data.resolved),
                   backgroundColor: "#141",
                   borderColor: "#292",
                   fill: false,
@@ -223,7 +217,7 @@ function DashboardPage() {
             <div className="h-[calc(25vh)] flex flex-col justify-center items-center  mb-4 p-4 pb-8 rounded bg-gray-50 overflow-hidden">
               <h3 className="text-base font-bold text-gray-700">Total Users</h3>
               <div>
-                <h3 className="text-6xl">450</h3>
+                <h3 className="text-6xl">9000</h3>
               </div>
             </div>
           </div>
@@ -338,11 +332,22 @@ function DashboardPage() {
                     value: 1321,
                   },
                 }}
-                hoverComponent={({ value }) => {
+                hoverComponent={({
+                  value,
+                }: {
+                  value: {
+                    name: string;
+                    value: number;
+                  };
+                }) => {
                   return (
                     <div>
                       <div>
-                        {value.name} Reports:{value.value}
+                        {value.name}
+                        <small>
+                          {" "}
+                          Reports: <b>{value.value}</b>
+                        </small>
                       </div>
                     </div>
                   );
