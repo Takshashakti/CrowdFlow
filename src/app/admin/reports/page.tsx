@@ -2,23 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import DashboardSidePannel from "@/components/DashboardSidePannel";
+import IncidentTableRow from "@/components/IncidentTableRow";
+
 
 import { Reports_data } from "@/lib/config/config";
 
 interface Issue {
   id: number;
-  user_id: number;
-  title: string;
-  description: string;
-  image_url: string;
-  type: string;
-  latitude: number;
-  longitude: number;
   city: string;
   state: string;
   district: string;
-  time: number;
-  incidents_id: number;
+  assignTo: number;
+  status: string;
 }
 
 function ReportsPage() {
@@ -27,7 +22,7 @@ function ReportsPage() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/getall"
+        "https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/getall"
       );
       const issuesRes = (await res.json()) as Issue[];
       console.log(issuesRes);
@@ -112,31 +107,32 @@ function ReportsPage() {
               </tr>
             </thead>
             <tbody>
-              {issues.map((report, index) => {
-                return report.title === null ? null : (
-                  <tr
-                    key={index}
-                    className="bg-white border-b dark:bg-gray-800 hover:bg-violet-50"
-                  >
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                    >
-                      {report.title}
-                    </th>
-                    <td className="px-6 py-4">{0}</td>
-                    <td className="px-6 py-4">{report.type}</td>
-                    <td className="px-6 py-4">{0}</td>
-                    <td className="px-6 py-4">{report.time}</td>
-                    <td className="px-6 py-4">
-                      <a
-                        href={`reports`}
-                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                      >
-                        View
-                      </a>
-                    </td>
-                  </tr>
+              {issues.map((incident, index) => {
+                return (
+                  <IncidentTableRow incidentId={incident.id} key={index}/>
+                  // <tr
+                  //   key={index}
+                  //   className="bg-white border-b dark:bg-gray-800 hover:bg-violet-50"
+                  // >
+                  //   <th
+                  //     scope="row"
+                  //     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                  //   >
+                  //     {incident.title}
+                  //   </th>
+                  //   <td className="px-6 py-4">{0}</td>
+                  //   <td className="px-6 py-4">{incident.type}</td>
+                  //   <td className="px-6 py-4">{0}</td>
+                  //   <td className="px-6 py-4">{incident.time}</td>
+                  //   <td className="px-6 py-4">
+                  //     <a
+                  //       href={incident.}
+                  //       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  //     >
+                  //       View
+                  //     </a>
+                  //   </td>
+                  // </tr>
                 );
               })}
             </tbody>

@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button";
+import { METHODS } from "http";
 
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, containScroll: "trimSnaps" };
@@ -55,6 +56,7 @@ type User = {
 
 export default function Report({ params }: { params: { report: string } }) {
   // const { incidentId } = params;
+  // console.log(params.report)
 
   const [reportsData, setReportsData] = React.useState<Report[]>([{
     id: 1,
@@ -74,13 +76,12 @@ export default function Report({ params }: { params: { report: string } }) {
   const [incidentTitle, setIncidentTitle] = React.useState<string>("");
   const [images, setImages] = React.useState<string[]>([]);
   const [users, setUsers] = useLocalStorage<User[]>("users", []);
-  const [assigne, setAssigne] = React.useState<User | null>(null);
-
+  const [assigne, setAssigne] = React.useState<string>("");
 
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/getall"
+        `https://crowdflowworkers.karmakarmeghdip.workers.dev/report/getByIncident?incidentsId=${params.report}`
       );
 
       const resJ = await res.json();
@@ -114,12 +115,20 @@ export default function Report({ params }: { params: { report: string } }) {
 
   function assignUser()
   {
-
+    fetch(`https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/assign`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        id: params.report,
+        userId: assigne,
+      })
+    }
+    )
   }
 
   return (
     <>
-      <DashboardSidePannel activeTab="report" />
+      <DashboardSidePannel activeTab="report-assign" />
 
       <div className="mx-[22%] w-[75%]">
 
@@ -137,7 +146,7 @@ export default function Report({ params }: { params: { report: string } }) {
 
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-4xl font-bold">Assign Issue to:</h1>
-          <Select>
+          <Select value={assigne} onValueChange={setAssigne}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Worker" />
             </SelectTrigger>
