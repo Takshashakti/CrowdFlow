@@ -49,7 +49,8 @@ const IncidentDetails: React.FC<PropType> = (props) => {
     //   };
       const res = await fetch(`https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?id=${props.disasterID}`)
       const disaster = await res.json();
-      setDisasterDetails(disaster);
+      console.log(disaster[0]);
+      setDisasterDetails(disaster[0]);
     }
     fetchDisasterDetails();
   }, []);
