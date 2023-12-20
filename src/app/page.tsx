@@ -89,8 +89,7 @@ export default function Home() {
                   <SheetHeader>
                     <SheetTitle>Assigned Tasks</SheetTitle>
                   </SheetHeader>
-                  <div className="overflow-scroll max-h-[25rem]">
-                    {/*  */}
+                  {/* <div className="overflow-scroll max-h-[25rem]">
                     <TaskViewItems children="Task 1" className="text-black"></TaskViewItems>
                     <TaskViewItems children="Task 2" className="text-black"></TaskViewItems>
                     <TaskViewItems children="Task 3" className="text-black"></TaskViewItems>
@@ -100,7 +99,7 @@ export default function Home() {
                     <TaskViewItems children="Task 7" className="text-black"></TaskViewItems>
                     <TaskViewItems children="Task 8" className="text-black"></TaskViewItems>
                     <TaskViewItems children="Task 9" className="text-black"></TaskViewItems>
-                  </div>
+                  </div> */}
                 </SheetContent>
               </Sheet>
   
