@@ -43,11 +43,11 @@ export default function Home() {
           <HomeSearchBar />
           <div className="flex flex-col w-full gap-2 justify-between">
             <Sheet>
-              {1 && (
+              
                 <SheetTrigger asChild className="w-full z-10">
                   <Button className="w-full">Assigned Tasks</Button>
                 </SheetTrigger>
-              )}
+              
               <SheetContent side="bottom">
                 <SheetHeader>
                   <SheetTitle>Assigned Tasks</SheetTitle>
