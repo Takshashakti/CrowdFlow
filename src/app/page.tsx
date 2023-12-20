@@ -39,14 +39,14 @@ export default function Home() {
     task9 : "Task9",
     task10 : "Task10",
 });
-  // useEffect(()=>{
-  //   (async()=>{
-  //     const user = JSON.parse(localStorage.getItem("UserObject") as string)
-  //     const res=await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?user_id="+user.id )
-  //     const arr=await res.json()
-  //     setTask(arr);
-  //   })()
-  // })
+  useEffect(()=>{
+    (async()=>{
+      const user = JSON.parse(localStorage.getItem("UserObject") as string)
+      const res=await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?user_id="+user.id )
+      const arr=await res.json()
+      setTask(arr);
+    })()
+  })
   
 
   return (
