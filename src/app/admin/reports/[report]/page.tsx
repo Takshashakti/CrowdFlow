@@ -6,6 +6,16 @@ import { EmblaOptionsType } from "embla-carousel-react";
 import "../../../css/sandbox.css";
 import "../../../css/embla.css";
 import DashboardSidePannel from "@/components/DashboardSidePannel";
+import { useLocalStorage } from "@/lib/hooks/use-local-storage";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Button } from "@/components/ui/button";
+
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, containScroll: "trimSnaps" };
 const SLIDE_COUNT = 5;
@@ -34,6 +44,13 @@ type Incident = {
   statis: string
 };
 
+type User = {
+  name: string;
+  age: number;
+  id: number;
+  phnNo: string;
+  gender: string;
+};
 
 
 export default function Report({ params }: { params: { report: string } }) {
@@ -56,6 +73,9 @@ export default function Report({ params }: { params: { report: string } }) {
 
   const [incidentTitle, setIncidentTitle] = React.useState<string>("");
   const [images, setImages] = React.useState<string[]>([]);
+  const [users, setUsers] = useLocalStorage<User[]>("users", []);
+  const [assigne, setAssigne] = React.useState<User | null>(null);
+
 
   useEffect(() => {
     (async () => {
@@ -65,7 +85,7 @@ export default function Report({ params }: { params: { report: string } }) {
 
       const resJ = await res.json();
       // const resJ2 = resJ.filter((report: Report) => report.incidents_id === parseInt(params.report));
-      
+
       // let incidents: any = {};
       // for (let i = 0; i < resJ.length; i++) {
       //   if (resJ[i].incidents_id === parseInt(params.report)) {
@@ -92,12 +112,17 @@ export default function Report({ params }: { params: { report: string } }) {
     })();
   }, []);
 
+  function assignUser()
+  {
+
+  }
+
   return (
     <>
       <DashboardSidePannel activeTab="report" />
 
       <div className="mx-[22%] w-[75%]">
-        
+
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-4xl font-bold">{incidentTitle}</h1>
         </div>
@@ -105,15 +130,40 @@ export default function Report({ params }: { params: { report: string } }) {
         <br /> <br />
 
         <div className="flex flex-col justify-center items-center w-[50?vh]">
-        <EmblaCarousel slides={images} options={OPTIONS}/>
+          <EmblaCarousel slides={images} options={OPTIONS} />
         </div>
+
+        <br /> <br />
+
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="text-4xl font-bold">Assign Issue to:</h1>
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Worker" />
+            </SelectTrigger>
+            <SelectContent>
+            {users.map((user) => (
+              <SelectItem key={user.id} value={user.id + ""}>
+                {user.name}
+              </SelectItem>
+            ))}
+            </SelectContent>
+          </Select>
+
+          <Button onClick={assignUser}>
+            Assign
+          </Button>
+
+        </div>
+
+
 
         <br /> <br />
 
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-4xl font-bold">Descriptions:</h1>
         </div>
-        
+
         <br />
 
         {
@@ -124,8 +174,8 @@ export default function Report({ params }: { params: { report: string } }) {
             </div>
           ))
         }
-        
-        
+
+
 
       </div>
     </>
