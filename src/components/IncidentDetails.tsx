@@ -34,7 +34,7 @@ const IncidentDetails: React.FC<PropType> = (props) => {
             // Create a dummy data
             const data : DisasterDetails = {
                 id: 1,
-                title: "Flood in hyderabad",
+                title: "Flood in Bhubaneswar",
                 type: "Flood",
                 avg_loc: "1.283, 103.843",
                 address: "Blk 123, Clementi Ave 3, #01-11, 231534",
@@ -59,7 +59,7 @@ const IncidentDetails: React.FC<PropType> = (props) => {
 
   return (
     <>
-    <MaxWidthWrapper>
+    
         <h1 className="text-3xl font-bold text-justify pt-5 pb-2">{disasterDetails?.title}</h1>
 
         <div className='w-full flex items-center text-justify'>
@@ -85,8 +85,8 @@ const IncidentDetails: React.FC<PropType> = (props) => {
             {/* <span className='flex text-center items-center justify-center align-middle w-[50%] h-[5dvh] rounded-xl bg-slate-800 mx-2 font-bold font-sans text-white'>num_reports}</span>
             <span className='flex text-center items-center justify-center align-middle w-[50%] h-[5dvh] rounded-xl bg-slate-800 mx-2 font-bold font-sans text-white'>Credibility: {disasterDetails?.credibility}</span> */}
 
-            <Button className={cn('w-[50%] mx-2')}><Check /></Button>
-            <Button className={cn('w-[50%] mx-2')}><CrossIcon /></Button>
+            <Button className={cn('w-[50%] mx-2 bg-green-700')}><Check /></Button>
+            <Button className={cn('w-[50%] mx-2 bg-red-700')}><X /></Button>
 
         </div>
 
@@ -98,7 +98,7 @@ const IncidentDetails: React.FC<PropType> = (props) => {
 
 
 
-    </MaxWidthWrapper>
+    
     </>
   )
 }

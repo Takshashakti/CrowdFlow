@@ -1,6 +1,7 @@
 "use client";
 
 import HomeSearchBar from "@/components/HomeSearchBar";
+import IncidentDetails from "@/components/IncidentDetails";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import NewIncidentSheet from "@/components/NewIncidentSheet";
 import TaskViewItems from "@/components/TaskViewItems";
@@ -26,6 +27,20 @@ export default function Home() {
     // if (window.localStorage.getItem("userAuthToken") === null) {
     //   redirect("/signup");
     // }
+    const [task, setTask]=useState(
+      {
+        task1: "Task1",
+        task2: "Task2",
+        task3: "Task3",
+        task4: "Task4",
+        task5: "Task5",
+        task6: "Task6",
+        task7: "Task7",
+        task8: "Task8",
+        task9: "Task9",
+        task10: "Task10",
+      });
+
 
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
 
@@ -38,7 +53,7 @@ export default function Home() {
           setSelectedIncidentId("");
         }}
       >
-        <DialogContent>{selectedIncidentId}</DialogContent>
+        <DialogContent ><IncidentDetails disasterID={"1"} /></DialogContent>
       </Dialog>
       <MaxWidthWrapper>
         <div className="flex flex-col justify-between w-full h-full">
@@ -55,16 +70,16 @@ export default function Home() {
                   <SheetTitle>Assigned Tasks</SheetTitle>
                 </SheetHeader>
                 <div className="overflow-scroll max-h-[25rem]">
-                <TaskViewItems className="border rounded-md">Task1</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task2</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task3</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task4</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task5</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task6</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task7</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task8</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task9</TaskViewItems>
-                <TaskViewItems className="border rounded-md">Task10</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task1}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task2}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task3}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task4}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task5}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task6}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task7}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task8}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task9}</TaskViewItems>
+                <TaskViewItems className="border rounded-md">{task.task10}</TaskViewItems>
                 </div>
               </SheetContent>
             </Sheet>
