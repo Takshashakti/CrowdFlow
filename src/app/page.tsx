@@ -23,23 +23,6 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
-  // if (typeof window !== "undefined")
-    // if (window.localStorage.getItem("userAuthToken") === null) {
-    //   redirect("/signup");
-    // }
-    const [task, setTask]=useState(
-      {
-        task1: "Task1",
-        task2: "Task2",
-        task3: "Task3",
-        task4: "Task4",
-        task5: "Task5",
-        task6: "Task6",
-        task7: "Task7",
-        task8: "Task8",
-        task9: "Task9",
-        task10: "Task10",
-      });
 
 
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
