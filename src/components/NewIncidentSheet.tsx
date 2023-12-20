@@ -78,6 +78,7 @@ const NewIncidentSheet = () => {
           setReportDescription={setReportDescription}
           reportCategory={reportCategory}
           setReportCategory={setReportCategory}
+          submitted={submitted}
           setSubmitted={setSubmitted}
           address={address}
           setAddress={setAddress}
