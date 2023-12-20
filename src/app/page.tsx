@@ -17,18 +17,16 @@ import {
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
- 
 
 const MapNoSSR = dynamic(() => import("@/components/Map"), {
   ssr: false,
 });
 
 export default function Home() {
-
-
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
   const [task, setTask] = useState({
-   task1 : "Task1", 
+
+<!--    task1 : "Task1", 
    task2 : "Task2",
     task3 : "Task3",
     task4 : "Task4",
@@ -37,7 +35,7 @@ export default function Home() {
     task7 : "Task7",
     task8 : "Task8",
     task9 : "Task9",
-    task10 : "Task10",
+    task10 : "Task10", -->
 });
   useEffect(()=>{
     (async()=>{
@@ -49,8 +47,19 @@ export default function Home() {
   })
   
 
+  // useEffect(()=>{
+  //   (async()=>{
+  //     const user = JSON.parse(localStorage.getItem("UserObject") as string)
+  //     const res=await fetch("https://crowdflowworkers.karmakarmeghdip.workers.dev/incident/get?user_id="+user.id )
+  //     const arr=await res.json()
+  //     setTask(arr);
+  //   })()
+  // })
+
+
+
   return (
-    <>
+    <div>
       <MapNoSSR setSelectedIncidentId={setSelectedIncidentId} />
       <Dialog
         open={selectedIncidentId !== ""}
@@ -58,24 +67,26 @@ export default function Home() {
           setSelectedIncidentId("");
         }}
       >
-        <DialogContent ><IncidentDetails disasterID={"1"} /></DialogContent>
+        <DialogContent>
+          <IncidentDetails disasterID={"1"} />
+        </DialogContent>
       </Dialog>
       <MaxWidthWrapper>
         <div className="flex flex-col justify-between w-full h-full">
           <HomeSearchBar />
           <div className="flex flex-col w-full gap-2 justify-between">
-            <Sheet>
-              {1 && (
+            <div className="hidden">
+              <Sheet>
                 <SheetTrigger asChild className="w-full z-10">
                   <Button className="w-full">Assigned Tasks</Button>
                 </SheetTrigger>
-              )}
-              <SheetContent side="bottom">
-                <SheetHeader>
-                  <SheetTitle>Assigned Tasks</SheetTitle>
-                </SheetHeader>
-                <div className="overflow-scroll max-h-[25rem]">
-                <TaskViewItems className="border rounded-md">{task.task1}</TaskViewItems>
+
+                <SheetContent side="bottom">
+                  <SheetHeader>
+                    <SheetTitle>Assigned Tasks</SheetTitle>
+                  </SheetHeader>
+                  <div className="overflow-scroll max-h-[25rem]">
+                    {/* <TaskViewItems className="border rounded-md">{task.task1}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task2}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task3}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task4}</TaskViewItems>
@@ -84,11 +95,11 @@ export default function Home() {
                 <TaskViewItems className="border rounded-md">{task.task7}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task8}</TaskViewItems>
                 <TaskViewItems className="border rounded-md">{task.task9}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task10}</TaskViewItems>
-                </div>
-              </SheetContent>
-            </Sheet>
-
+                <TaskViewItems className="border rounded-md">{task.task10}</TaskViewItems> */}
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
             <Sheet>
               <SheetTrigger asChild className="w-full z-10 ">
                 <Button className="w-full">Report New Incident</Button>
@@ -104,6 +115,6 @@ export default function Home() {
           </div>
         </div>
       </MaxWidthWrapper>
-    </>
+    </div>
   );
 }

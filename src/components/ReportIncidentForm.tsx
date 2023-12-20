@@ -47,11 +47,17 @@ type PropType = {
   setUserLat: Dispatch<SetStateAction<string>>;
   // lng: string;
   setUserLng: Dispatch<SetStateAction<string>>;
+  submitted: boolean;
 };
 
 const ReportIncidentForm: React.FC<PropType> = (props) => {
   const [agreed, setAgreed] = useState<boolean>(false);
   // const { loading, latitude, longitude } = useGeolocation();
+
+  const [reportCategory, setReportCategory] = useState<string>("");
+  const [reportDescription, setReportDescription] = useState<string>("");
+  const [reportName, setReportName] = useState<string>("");
+  const [address, setAddress] = useState<ReverseGeocodeResponse | null>(null);
 
   const { loading, latitude, longitude } = useGeolocation();
   const [lat, setLat] = useState<string>();
@@ -75,7 +81,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
           encodeURI(lng as string)
         );
         // props.setAddress(`${res.county}, ${res.state}, ${res.region}, ${res.country}`)
-        props.setAddress(res);
+        setAddress(res);
       }
     })();
     console.log("adress done");
@@ -83,34 +89,35 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            user_id: 1,
-            // name: reportName,
-            description: "reportDescription",
-            type: "reportCategory",
-            // images: selectedImages,
-            image_url: "",
-            city: "address?.address.city",
-            state: "address?.address.state",
-            district: "address?.address.district",
-            time: 69,
-            latitude: 69.42,
-            longitude: 69.42,
-          }),
-        }
-      );
+      if (true) {
+        const res = await fetch(
+          "https://crowdflowworkers.karmakarmeghdip.workers.dev/report/register",
+          {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id: 1,
+              title: reportName,
+              description: reportDescription,
+              type: reportCategory,
+              // images: selectedImages,
+              image_url: "",
+              city: "city",
+              state: "state",
+              district: "district",
+              latitude: parseFloat(lat as string),
+              longitude: parseFloat(lng as string),
+            }),
+          }
+        );
 
-      console.log(await res.json());
+        console.log(await res.json());
+      }
     })();
-  });
+  }, [props.submitted]);
 
   return (
     <div className="flex flex-col px-6 ">
@@ -125,7 +132,7 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         <Card className="flex flex-col items-center">
           <CardContent className="">
             <span className="">
-              {loading ? "loading" : props.address?.display_name}
+              {loading ? "loading" : address?.display_name}
             </span>
           </CardContent>
         </Card>
@@ -133,9 +140,9 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         <Input
           type="text"
           name="Name"
-          value={props.reportName}
+          value={reportName}
           onChange={(e) => {
-            props.setReportName(e.target.value);
+            setReportName(e.target.value);
           }}
           className=" border px-1 py-2 text-l rounded-md bg-slate-100"
           placeholder=" Report Name"
@@ -145,16 +152,17 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
           name="Description"
           className=" border h-44 px-1 py-2 text-l rounded-md bg-slate-100"
           placeholder=" Report Description"
-          value={props.reportDescription}
+          value={reportDescription}
           onChange={(e) => {
-            props.setReportDescription(e.target.value);
+            setReportDescription(e.target.value);
           }}
         />
 
         <div className="flex flex-col">
           <Select
-            value={props.reportCategory}
-            onValueChange={props.setReportCategory}
+            value={reportCategory}
+            onValueChange={setReportCategory}
+            defaultValue={INCIDENT_CATEGORIES[0]}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Choose an incident..." />
@@ -205,7 +213,6 @@ const ReportIncidentForm: React.FC<PropType> = (props) => {
         >
           Submit Report
         </Button>
-
       </form>
     </div>
   );
