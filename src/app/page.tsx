@@ -22,6 +22,16 @@ const MapNoSSR = dynamic(() => import("@/components/Map"), {
   ssr: false,
 });
 
+type task={
+  id:number,
+  title: string,
+  name:string,
+  token:string,
+  phone:string,
+  gender:string,
+  age:number,
+}
+
 export default function Home() {
   if (typeof window !== "undefined")
     if (window.localStorage.getItem("UserObject") === null) {
@@ -29,6 +39,7 @@ export default function Home() {
     }
 
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
+
   const [task, setTask] = useState({
     task1: "Task1",
     task2: "Task2",
@@ -52,7 +63,7 @@ export default function Home() {
       setTask(arr);
     })();
   }, []);
-
+  
   return (
     <div>
       <MapNoSSR setSelectedIncidentId={setSelectedIncidentId} />
@@ -68,7 +79,7 @@ export default function Home() {
         <div className="flex flex-col justify-between w-full h-full">
           <HomeSearchBar />
           <div className="flex flex-col w-full gap-2 justify-between">
-            <div className="hidden">
+            
               <Sheet>
                 <SheetTrigger asChild className="w-full z-10">
                   <Button className="w-full">Assigned Tasks</Button>
@@ -79,20 +90,24 @@ export default function Home() {
                     <SheetTitle>Assigned Tasks</SheetTitle>
                   </SheetHeader>
                   <div className="overflow-scroll max-h-[25rem]">
-                    {/* <TaskViewItems className="border rounded-md">{task.task1}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task2}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task3}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task4}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task5}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task6}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task7}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task8}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task9}</TaskViewItems>
-                <TaskViewItems className="border rounded-md">{task.task10}</TaskViewItems> */}
+                    {task.map((t : any, index) => {
+                      return (
+                        <TaskViewItems children={t.title} key={index}></TaskViewItems>
+                      );
+                    })}
+                    <TaskViewItems children="Task 1" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 2" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 3" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 4" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 5" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 6" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 7" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 8" className="text-black"></TaskViewItems>
+                    <TaskViewItems children="Task 9" className="text-black"></TaskViewItems>
                   </div>
                 </SheetContent>
               </Sheet>
-            </div>
+  
             <Sheet>
               <SheetTrigger asChild className="w-full z-10 ">
                 <Button className="w-full">Report New Incident</Button>
