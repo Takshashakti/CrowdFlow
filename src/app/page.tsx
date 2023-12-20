@@ -26,7 +26,7 @@ export default function Home() {
   const [selectedIncidentId, setSelectedIncidentId] = useState<string>("");
   const [task, setTask] = useState({
 
-<!--    task1 : "Task1", 
+task1 : "Task1", 
    task2 : "Task2",
     task3 : "Task3",
     task4 : "Task4",
@@ -35,7 +35,7 @@ export default function Home() {
     task7 : "Task7",
     task8 : "Task8",
     task9 : "Task9",
-    task10 : "Task10", -->
+    task10 : "Task10", 
 });
   useEffect(()=>{
     (async()=>{
