@@ -50,7 +50,7 @@ export default function Home() {
   
 
   return (
-    <>
+    <div>
       <MapNoSSR setSelectedIncidentId={setSelectedIncidentId} />
       <Dialog
         open={selectedIncidentId !== ""}
@@ -64,6 +64,7 @@ export default function Home() {
         <div className="flex flex-col justify-between w-full h-full">
           <HomeSearchBar />
           <div className="flex flex-col w-full gap-2 justify-between">
+            <div className="hidden">
             <Sheet>
               
                 <SheetTrigger asChild className="w-full z-10">
@@ -88,7 +89,7 @@ export default function Home() {
                 </div>
               </SheetContent>
             </Sheet>
-
+            </div>
             <Sheet>
               <SheetTrigger asChild className="w-full z-10 ">
                 <Button className="w-full">Report New Incident</Button>
@@ -104,6 +105,6 @@ export default function Home() {
           </div>
         </div>
       </MaxWidthWrapper>
-    </>
+      </div>
   );
 }
